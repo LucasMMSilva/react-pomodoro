@@ -1,0 +1,13 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7px;
+    width: 100%;
+}
+.content input{
+    height: 30px;
+    padding: 0 10px;
+}
+.content input:focus{
+    outline: none;
+}

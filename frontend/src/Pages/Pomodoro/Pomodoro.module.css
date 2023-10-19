@@ -1,0 +1,29 @@
+.container{
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+.sidebar{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+    .sidebar a{
+        text-decoration: none;
+        font-size: 1.3em;
+        color: black;
+        font-weight: 400;
+        display: block;
+    }
+a.newtask{
+    background-color: #e3e3e3;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #c7c7c7;
+    border-radius: 10px;
+    font-size: 1.2em;
+    padding: 2px 30px;
+    margin-bottom: 15px;
+}
+a.active{
+    color: gray;
+    text-indent: 10px;
+}

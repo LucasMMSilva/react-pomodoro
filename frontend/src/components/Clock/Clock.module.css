@@ -1,0 +1,36 @@
+.container{
+    padding-top: 10px;
+    text-align: center;
+}
+.header{
+    margin-bottom: 5px;
+}
+.header h2{
+    color: rgb(70, 70, 70);
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.header p{
+    color: grey;
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+.buttoncontainer button{
+    margin: 2px 2px;
+    width: 130px;
+    padding: 4px 0;
+    background-color: #e3e3e3;
+    border: none;
+    color: rgb(70, 70, 70);
+    font-size: 1.1em;
+    cursor: pointer;
+}
+.buttoncontainer button.bluebutton{
+    background-color: #0080DD;
+    color: white;
+}
+.timer h1{
+    font-size: 6em;
+    font-weight: 500;
+}
