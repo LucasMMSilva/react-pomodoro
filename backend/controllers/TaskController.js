@@ -80,5 +80,27 @@ const taskUpdateById = async (req,res)=>{
     res.status(201).json(newTask)
 }
 
+const deleteTaskById = async(req,res)=>{
+    const {id} = req.params
+    const userId= req.user.id
 
-module.exports = {createTask,getAllTaskByUser,getTaskById,taskUpdateById}
+    const task = await Task.findById(id)
+
+    if(!task){
+        res.status(422).json({errors:['Task not found.']})
+        return
+    }
+
+    if(task.userId != userId){
+        res.status(422).json({errors:['Access denied.']})
+        return
+    }
+    try{
+        await Task.deleteOne(task._id)
+        res.status(200).json({msg:['Task deleted successfully.']})
+    }catch(error){
+        res.status(422).json({errors:['Task not found.']})
+    }
+}
+
+module.exports = {createTask,getAllTaskByUser,getTaskById,taskUpdateById,deleteTaskById}
