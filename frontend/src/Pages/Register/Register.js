@@ -2,8 +2,23 @@ import React from 'react'
 import styles from './Register.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link} from 'react-router-dom'
+import { useState } from 'react'
+import api from '../../hooks/api'
+
 
 const Register = () => {
+  const [user,setUser] = useState({})
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    setUser({
+      username:e.target[0].value,
+      email:e.target[1].value,
+      password:e.target[2].value
+    })
+    console.log(user)
+   
+      
+  }
   return (
     <div className={styles.container}>
         <div className={styles.image}>
@@ -15,7 +30,7 @@ const Register = () => {
               <h1>Register</h1>
               <p>Register your user profile.</p>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <InputLabel label='Username' name='username' type='text' placeholder='ex. lucasmanoel'/>
                 <InputLabel label='E-mail' name='email' type='email' placeholder='ex. lucasmanoel@mail.com'/>
                 <InputLabel label='Password' name='password' type='password' placeholder='The password must be longer than 6 characters.'/>

@@ -6,7 +6,7 @@ export const useAuthentication = ()=>{
 
   const auth = getAuth()
 
-  const registerNewUser =(user)=>{
+  const registerNewUser = async(user)=>{
     
   }
   return {}
