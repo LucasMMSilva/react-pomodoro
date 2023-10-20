@@ -4,9 +4,10 @@ import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
 import api from '../../hooks/api'
-
+import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Register = () => {
+  const {registerNewUser} = useAuthentication()
   const [user,setUser] = useState({})
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -15,8 +16,7 @@ const Register = () => {
       email:e.target[1].value,
       password:e.target[2].value
     })
-    console.log(user)
-   
+    registerNewUser(user)
       
   }
   return (
