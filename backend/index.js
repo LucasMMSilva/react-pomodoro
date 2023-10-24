@@ -5,6 +5,8 @@ const app = express()
 const cors = require('cors')
 const router = require('./routes/routes')
 
+app.use(cors({credentials:true,origin:'http://127.0.0.1:3000'}))
+
 app.use(express.json())
 app.use(express.urlencoded({
     extended: true

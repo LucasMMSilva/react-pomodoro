@@ -51,7 +51,6 @@ const Clock = () => {
     }
     const initialize = ()=>{
          
-        
         if(isPaused){
             setIsPaused(false)
             

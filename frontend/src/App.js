@@ -7,13 +7,14 @@ import Register from './Pages/Register/Register';
 import Login from './Pages/Login/Login';
 import Clock from './components/Clock/Clock'
 import CreateTask from './components/CreateTask/CreateTask'
+import Welcome from './components/Welcome/Welcome';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar/>
         <Routes>
-          <Route path='/' element={<Pomodoro/>}/>
+          <Route path='/' element={<Pomodoro><Welcome/></Pomodoro>}/>
           <Route path='/createnewtask' element={<Pomodoro>
             <CreateTask/>
           </Pomodoro>}/>

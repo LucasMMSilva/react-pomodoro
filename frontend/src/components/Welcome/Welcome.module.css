@@ -1,0 +1,15 @@
+.emphasis{
+width: 500px;
+margin: 50px auto;
+
+}
+.emphasis h1{
+    color: rgb(70, 70, 70);
+    font-size: 1.9em;
+    font-weight: 600;
+}
+.emphasis p{
+    color: rgb(102, 102, 102);
+    font-size: 1.15em;
+    font-weight: 200;
+}
