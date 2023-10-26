@@ -6,7 +6,8 @@ export const useAuthentication = ()=>{
 
 
   const registerNewUser = async(user)=>{
-    await api.post('/user/register',user)
+    await api.post('/user/register',user).then((response)=>{console.log(response.data)})
+  
   }
   return {registerNewUser}
 }
