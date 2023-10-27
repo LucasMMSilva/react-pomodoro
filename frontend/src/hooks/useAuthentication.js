@@ -6,9 +6,12 @@ export const useAuthentication = ()=>{
 
 
   const registerNewUser = async(user)=>{
-    const test = {username:'bilu11',email:'lucasmanoelm2elo11@gmail.com',password:'5465465465'}
-    //console.log(user)
-    await api.post('/user/register',test).then((response)=>{console.log(response.data)}).catch(function (error) {
+    console.log(user)
+    await api.post('/user/register',user)
+    .then((response)=>{
+      sessionStorage.setItem('user',response.data.token)
+    })
+    .catch(function (error) {
       console.error(error);
     });
   
