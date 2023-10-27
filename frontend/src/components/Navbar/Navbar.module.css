@@ -6,3 +6,7 @@
     font-weight: bold;
     line-height: 45px;
 }
+.navbar a{
+    color: white;
+    text-decoration: none;
+}
