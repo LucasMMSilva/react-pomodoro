@@ -10,7 +10,6 @@ const InputLabel = (props) => {
   const handleChange = (e)=>{
     e.preventDefault()
     setValueChange(e.target.value||'')
-    console.log(e.target.value)
   }
   
   return (

@@ -8,18 +8,17 @@ import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Register = () => {
   const {registerNewUser} = useAuthentication()
-  const [user,setUser] = useState({})
   
   const handleSubmit = (e)=>{
     e.preventDefault()
-    setUser({
+    const user = {
       username:e.target[0].value,
       email:e.target[1].value,
       password:e.target[2].value
-    })
     
-    console.log(user)
-    //registerNewUser(user)
+    }
+
+    registerNewUser(user)
       
   }
   return (
