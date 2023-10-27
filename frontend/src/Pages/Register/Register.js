@@ -16,7 +16,9 @@ const Register = () => {
       email:e.target[1].value,
       password:e.target[2].value
     })
-    registerNewUser(user)
+    
+    console.log(user)
+    //registerNewUser(user)
       
   }
   return (
