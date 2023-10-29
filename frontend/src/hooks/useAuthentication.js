@@ -6,7 +6,7 @@ export const useAuthentication = ()=>{
     await api.post('/user/register',user)
     .then((response)=>{
       console.log(response.data);
-      sessionStorage.setItem('user',response.data.token)
+      sessionStorage.setItem('token',response.data.token)
     })
     .catch(function (error) {
       console.log(error.response.data.errors);
@@ -17,7 +17,7 @@ export const useAuthentication = ()=>{
     await api.post('/user/login',user)
     .then((response)=>{
       console.log(response.data);
-      sessionStorage.setItem('user',response.data.token)
+      sessionStorage.setItem('token',response.data.token)
     }).catch(function (error){
       console.log(error.response.data.errors)
     })
