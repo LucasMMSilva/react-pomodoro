@@ -96,8 +96,8 @@ const login = async(req,res)=>{
         res.status(422).json({errors:['This email is not registered in our system, you must have typed something wrong.']})
         return
     }
-
-    if(!bcrypt.compare(password,user.password)){
+    const passwordMatch = await bcrypt.compare(password,user.password)
+    if(!passwordMatch){
         res.status(422).json({errors:['Incorrect password.']})
         return
     }
