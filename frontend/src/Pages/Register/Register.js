@@ -7,7 +7,7 @@ import api from '../../hooks/api'
 import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Register = () => {
-  const {registerNewUser} = useAuthentication()
+  const {authRegister} = useAuthentication()
   
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -18,7 +18,7 @@ const Register = () => {
     
     }
 
-    registerNewUser(user)
+    authRegister(user)
       
   }
   return (

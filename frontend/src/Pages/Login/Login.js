@@ -2,8 +2,20 @@ import React from 'react'
 import styles from './Login.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link} from 'react-router-dom'
+import { useAuthentication } from '../../hooks/useAuthentication'
+const Login = async() => {
 
-const Register = () => {
+  const {authLogin} = useAuthentication()
+
+  const handleSubmit = (e)=>{
+    const user = {
+      email:e.target[0].value,
+      password:e.target[1].value
+    }
+    console.log(user)
+    authLogin(user)
+  }
+
   return (
     <div className={styles.container}>
         <div className={styles.image}>
@@ -15,7 +27,7 @@ const Register = () => {
               <h1>Login</h1>
               <p>Welcome back.</p>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <InputLabel label='E-mail' name='email' type='email' placeholder='ex. lucasmanoel@mail.com'/>
                 <InputLabel label='Password' name='password' type='password' placeholder='The password must be longer than 6 characters.'/>
                 <button type='submit'>Login</button>
@@ -26,4 +38,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login

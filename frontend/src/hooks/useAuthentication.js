@@ -1,20 +1,27 @@
 import api from './api'
 import {useEffect,useState} from 'react'
 export const useAuthentication = ()=>{
-  const [error , setError] = useState(null)
-  const [louding, setLoading] = useState(null)
 
-
-  const registerNewUser = async(user)=>{
-    console.log(user)
+  const authRegister = async(user)=>{
     await api.post('/user/register',user)
     .then((response)=>{
+      console.log(response.data);
       sessionStorage.setItem('user',response.data.token)
     })
     .catch(function (error) {
-      console.error(error);
+      console.log(error.response.data.errors);
     });
-  
   }
-  return {registerNewUser}
+
+  const authLogin = async(user)=>{
+    await api.post('/user/login',user)
+    .then((response)=>{
+      console.log(response.data);
+      sessionStorage.setItem('user',response.data.token)
+    }).catch(function (error){
+      console.log(error.response.data.errors)
+    })
+  }
+
+  return {authRegister,authLogin}
 }
