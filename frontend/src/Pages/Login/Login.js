@@ -3,11 +3,12 @@ import styles from './Login.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
-const Login = async() => {
-
+const Login = () => {
+  
   const {authLogin} = useAuthentication()
 
   const handleSubmit = (e)=>{
+    e.preventDefault()
     const user = {
       email:e.target[0].value,
       password:e.target[1].value
