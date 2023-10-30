@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 
 export const useAuthentication = ()=>{
   const [authenticated, setAuthenticated] = useState('false')
-  const {navigate} = useNavigate()
+  const navigate = useNavigate()
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -23,14 +23,14 @@ export const useAuthentication = ()=>{
     setAuthenticated(false)
     localStorage.removeItem('token')
     api.defaults.headers.Authorization = undefined
-    navigate('/')
+    navigate('/login')
   }
 
   const authRegister = async(user)=>{
     try{
       const data = await api.post('/user/register',user)
       .then((response)=>{
-        sessionStorage.setItem('token',response.data.token)
+        localStorage.setItem('token',response.data.token)
       })
       authUser(data)
     }catch(error){
@@ -44,11 +44,12 @@ export const useAuthentication = ()=>{
       const data =await api.post('/user/login',user)
       .then((response)=>{
         console.log(response.data);
-        sessionStorage.setItem('token',response.data.token)
+        localStorage.setItem('token',response.data.token)
       }).catch(function (error){
         console.log(error.response.data.errors)
       })
       authUser(data)
+
     } catch (error) {
       
     }

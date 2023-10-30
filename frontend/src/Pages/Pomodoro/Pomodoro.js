@@ -1,12 +1,34 @@
-import { useEffect, useState } from 'react'
-import {NavLink} from 'react-router-dom'
+import { useEffect,useLayoutEffect, useState } from 'react'
+import {NavLink,useNavigate} from 'react-router-dom'
 import styles from './Pomodoro.module.css'
 import Clock from '../../components/Clock/Clock'
 import CreateTask from '../../components/CreateTask/CreateTask'
 import api from '../../hooks/api'
+import {useAuthentication} from '../../hooks/useAuthentication'
 const Pomodoro = ({children}) => {
-  const [tasks,setTasks] = useState([])
+  const navigate = useNavigate()
+  const {authenticated} = useAuthentication()
+  const [tasks, setTasks] = useState([])
+  
+  
+  useLayoutEffect(()=>{
+    if(authenticated){
+      navigate('/login')
+      console.log(authenticated)
+    }
+  },[])
 
+  const [token] = useState(localStorage.getItem('token')||'')
+  /*
+  useEffect(()=>{
+    api.get('/pets/mypets',{
+      header:{
+        Authorization:`${JSON.parse(token)}`
+      }
+    }).then((response)=>{
+      setTasks(response.data.tasks)
+    })
+  })*/
   
   return (
     <div className={styles.container}>

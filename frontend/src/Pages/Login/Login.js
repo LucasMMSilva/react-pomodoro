@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Login.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
 const Login = () => {
   
-  const {authLogin} = useAuthentication()
-
+  const {authLogin,authenticated} = useAuthentication()
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(authenticated){
+      navigate('/')
+    }
+  },[])
   const handleSubmit = (e)=>{
     e.preventDefault()
     const user = {
       email:e.target[0].value,
       password:e.target[1].value
     }
-    console.log(user)
     authLogin(user)
   }
 
