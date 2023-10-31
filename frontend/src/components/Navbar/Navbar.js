@@ -5,15 +5,17 @@ import { RiLogoutBoxFill } from "react-icons/ri";
 import { useAuthentication } from '../../hooks/useAuthentication';
 const Navbar = () => {
   const {logout,authenticated}=useAuthentication()
+  console.log('nb-> '+authenticated)
   return (
     <>
-      {authenticated?(<div className={styles.navbar}>
+      {authenticated?(
+      <div className={styles.navbar}>
         <Link to={'/'}>POMODORO</Link>
         <button onClick={logout}>
           <RiLogoutBoxFill/>
         </button>
-        
-    </div>):(<></>)}
+      </div>
+    ):(<></>)}
     </>
     
   )

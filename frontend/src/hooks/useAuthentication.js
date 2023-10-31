@@ -3,15 +3,18 @@ import {useEffect,useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 export const useAuthentication = ()=>{
-  const [authenticated, setAuthenticated] = useState('false')
+  const [authenticated, setAuthenticated] = useState(false)
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate()
 
   useEffect(()=>{
+    setLoading(true)
     const token = localStorage.getItem('token')
     if(token){
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
       setAuthenticated(true)
     }
+    setLoading(false)
   },[])
 
   const authUser = (data)=>{
