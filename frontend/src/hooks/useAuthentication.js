@@ -11,7 +11,7 @@ export const useAuthentication = ()=>{
     setLoading(true)
     const token = localStorage.getItem('token')
     if(token){
-      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
+      api.defaults.headers.Authorization = `Bearer ${token}`
       setAuthenticated(true)
     }
     setLoading(false)
@@ -20,8 +20,10 @@ export const useAuthentication = ()=>{
   const authUser = (data)=>{
     setAuthenticated(true)
     localStorage.setItem('token',JSON.stringify(data.token))
+    console.log(localStorage.getItem('token'))
     navigate('/')
   }
+
   const logout = ()=>{
     setAuthenticated(false)
     localStorage.removeItem('token')

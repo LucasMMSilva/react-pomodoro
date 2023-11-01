@@ -102,7 +102,7 @@ const login = async(req,res)=>{
         return
     }
 
-    res.status(201).json({_id:user._id,profileImage: user.profileImage, token: generateToken(user._id)})
+    res.status(201).json({_id:user._id, token: generateToken(user._id)})
     
 }
 module.exports = {

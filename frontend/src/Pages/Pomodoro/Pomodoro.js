@@ -13,22 +13,25 @@ const Pomodoro = ({children}) => {
   
   useLayoutEffect(()=>{
     if(authenticated){
-      navigate('/login')
       console.log(authenticated)
+      navigate('/login')
     }
   },[])
 
-  const [token] = useState(localStorage.getItem('token')||'')
-  /*
+  const token = localStorage.getItem('token')
+  
   useEffect(()=>{
-    api.get('/pets/mypets',{
-      header:{
-        Authorization:`${JSON.parse(token)}`
+    if(token){
+      api.get('/task/tasks',{
+      headers:{
+        Authorization:`Bearer ${token}`
       }
-    }).then((response)=>{
-      setTasks(response.data.tasks)
-    })
-  })*/
+      }).then((response)=>{
+        setTasks(response.data.tasks)
+        console.log(tasks)
+      })
+    }
+  },[])
   
   return (
     <div className={styles.container}>
