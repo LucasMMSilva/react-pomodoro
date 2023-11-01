@@ -34,16 +34,15 @@ const Clock = () => {
     useEffect(()=>{
         setLouding(true)
         contador()
-        tasks.current.map((myTask)=>{
-            if(myTask.id == id){
-                setTask(myTask)
-                setMinute(myTask.pomodoro)
+        
+            if(task){
+                setMinute(task.pomodoro)
                 setSeconde(0)
             }
-       })
+       
        setLouding(false)
        return contador()
-    },[id,tasks,task])
+    },[id,task])
 
     const contador = ()=>{setInterval(()=>{
         console.log(minute+':'+seconde)
