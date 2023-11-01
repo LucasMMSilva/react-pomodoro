@@ -1,21 +1,37 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Clock.module.css'
 import { useParams } from 'react-router-dom'
+import api from '../../hooks/api';
 const Clock = () => {
     const initiar = useRef();
     const {id} = useParams()
-    const tasks = useRef([
-        {id:'6d54f6d65f', name:'Estudar Javascript',pomodoro:25,short:5,long:15,uid:'5ff4'},
-        {id:'5d54f6d66f', name:'Estudar C++',pomodoro:1,short:5,long:15,uid:'5ff4'},
-        {id:'4d54f6d45f', name:'Estudar Matematica',pomodoro:30,short:5,long:15,uid:'5ff4'}
-    ])
     const [task,setTask] = useState([])
     const [louding,setLouding] = useState(true)
     const [minute,setMinute] = useState(0)
     const [seconde,setSeconde] = useState(0)
     const [isPaused,setIsPaused] = useState(true)
     const [currentFunction,setCurrentFunction] = useState('POMODORO')
+    const token = localStorage.getItem('token')
+
     useLayoutEffect(()=>{
+        try {
+          if(token){
+          api.get(`/task/${id}`,{
+          headers:{
+            Authorization:`Bearer ${JSON.parse(token)}`
+          }
+          }).then((response)=>{
+            setTask(response.data.tasks)
+            console.log(task)
+          })
+        }
+        } catch (error) {
+          
+        }
+        
+      },[])
+
+    useEffect(()=>{
         setLouding(true)
         contador()
         tasks.current.map((myTask)=>{

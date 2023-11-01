@@ -21,16 +21,21 @@ const Pomodoro = ({children}) => {
   const token = localStorage.getItem('token')
   
   useEffect(()=>{
-    if(token){
+    try {
+      if(token){
       api.get('/task/tasks',{
       headers:{
-        Authorization:`Bearer ${token}`
+        Authorization:`Bearer ${JSON.parse(token)}`
       }
       }).then((response)=>{
         setTasks(response.data.tasks)
         console.log(tasks)
       })
     }
+    } catch (error) {
+      
+    }
+    
   },[])
   
   return (
