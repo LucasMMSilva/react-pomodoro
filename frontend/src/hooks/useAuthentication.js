@@ -6,7 +6,9 @@ import { useAuthContext } from './useAuthContext'
 
 export const useAuthentication = ()=>{
   const [loading,setLoading] = useState(false)
+
   const navigate = useNavigate()
+
   const {authenticated,setAuthenticated} = useAuthContext()
 
   useEffect(()=>{
@@ -22,9 +24,9 @@ export const useAuthentication = ()=>{
   const authUser = (data)=>{
 
     localStorage.setItem('token',JSON.stringify(data.token))
-    console.log('oi')
+    console.log(data)
     setAuthenticated(true)
-    navigate('/')
+    //navigate('/')
   }
 
   const logout = ()=>{
@@ -36,9 +38,10 @@ export const useAuthentication = ()=>{
 
   const authRegister = async(user)=>{
     try{
-      const data = await api.post('/user/register',user)
+      var data 
+      await api.post('/user/register',user)
       .then((response)=>{
-        localStorage.setItem('token',response.data.token)
+         data = response.data
       })
       authUser(data)
     }catch(error){
@@ -49,12 +52,12 @@ export const useAuthentication = ()=>{
 
   const authLogin = async(user)=>{
     try {
-      const data = await api.post('/user/login',user)
+      var data 
+      await api.post('/user/login',user)
       .then((response)=>{
-        localStorage.setItem('token',response.data.token)
+         data = response.data
       })
       authUser(data)
-
     } catch (error) {
       
     }

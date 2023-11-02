@@ -1,11 +1,21 @@
 import React, { useEffect } from 'react'
 import styles from './Register.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
-import {Link} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
-
+import { useAuthContext } from '../../hooks/useAuthContext'
 const Register = () => {
+
+  const navigate = useNavigate()
+
   const {authRegister} = useAuthentication()
+  const {authenticated} = useAuthContext()
+
+  useEffect(()=>{
+    if(authenticated){
+      navigate('/')
+    }
+  },[authenticated])
   
   const handleSubmit = (e)=>{
     e.preventDefault()
