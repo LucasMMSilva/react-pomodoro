@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import './App.css';
 import Pomodoro from './Pages/Pomodoro/Pomodoro';
@@ -12,18 +11,18 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar/>
-        <Routes>
-          <Route path='/' element={<Pomodoro><Welcome/></Pomodoro>}/>
-          <Route path='/createnewtask' element={<Pomodoro>
-            <CreateTask/>
-          </Pomodoro>}/>
-          <Route path='/task/:id' element={<Pomodoro>
-            <Clock/>
-          </Pomodoro>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
-        </Routes>
+          <Navbar/>
+          <Routes>
+            <Route path='/' element={<Pomodoro><Welcome/></Pomodoro>}/>
+            <Route path='/createnewtask' element={<Pomodoro>
+              <CreateTask/>
+            </Pomodoro>}/>
+            <Route path='/task/:id' element={<Pomodoro>
+              <Clock/>
+            </Pomodoro>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
+          </Routes>
       </BrowserRouter>
     </div>
   );

@@ -1,22 +1,10 @@
 import { useEffect,useLayoutEffect, useState } from 'react'
 import {NavLink,useNavigate} from 'react-router-dom'
 import styles from './Pomodoro.module.css'
-import Clock from '../../components/Clock/Clock'
-import CreateTask from '../../components/CreateTask/CreateTask'
 import api from '../../hooks/api'
-import {useAuthentication} from '../../hooks/useAuthentication'
 const Pomodoro = ({children}) => {
   const navigate = useNavigate()
-  const {authenticated} = useAuthentication()
   const [tasks, setTasks] = useState([])
-  
-  
-  useLayoutEffect(()=>{
-    if(!authenticated){
-      console.log(authenticated)
-      navigate('/login')
-    }
-  },[])
 
   const token = localStorage.getItem('token')
   

@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import styles from './Register.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link} from 'react-router-dom'
-import { useState } from 'react'
-import api from '../../hooks/api'
 import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Register = () => {
