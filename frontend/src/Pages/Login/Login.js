@@ -7,11 +7,13 @@ const Login = () => {
   
   const {authLogin,authenticated} = useAuthentication()
   const navigate = useNavigate()
+
   useEffect(()=>{
     if(authenticated){
       navigate('/')
     }
-  },[])
+  },[authenticated])
+
   const handleSubmit = (e)=>{
     e.preventDefault()
     const user = {

@@ -12,7 +12,7 @@ const Pomodoro = ({children}) => {
   
   
   useLayoutEffect(()=>{
-    if(authenticated){
+    if(!authenticated){
       console.log(authenticated)
       navigate('/login')
     }
@@ -23,20 +23,20 @@ const Pomodoro = ({children}) => {
   useEffect(()=>{
     try {
       if(token){
-      api.get('/task/tasks',{
-      headers:{
-        Authorization:`Bearer ${JSON.parse(token)}`
+        api.get('/task/tasks',{
+        headers:{
+          Authorization:`Bearer ${JSON.parse(token)}`
+        }
+        }).then((response)=>{
+          setTasks(response.data.tasks)
+          console.log(response.data)
+        })
       }
-      }).then((response)=>{
-        setTasks(response.data.tasks)
-        console.log(tasks)
-      })
-    }
     } catch (error) {
       
     }
     
-  },[])
+  },[token])
   
   return (
     <div className={styles.container}>
