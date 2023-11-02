@@ -2,13 +2,20 @@ import { useEffect,useLayoutEffect, useState } from 'react'
 import {NavLink,useNavigate} from 'react-router-dom'
 import styles from './Pomodoro.module.css'
 import api from '../../hooks/api'
+import {useAuthContext} from '../../hooks/useAuthContext'
 const Pomodoro = ({children}) => {
+
   const navigate = useNavigate()
   const [tasks, setTasks] = useState([])
-
+  const {authenticated, setAuthenticated} = useAuthContext()
   const token = localStorage.getItem('token')
+
+
   
   useEffect(()=>{
+    if(!authenticated){
+      navigate('/login')
+    }
     try {
       if(token){
         api.get('/task/tasks',{
@@ -24,7 +31,7 @@ const Pomodoro = ({children}) => {
       
     }
     
-  },[token])
+  },[token,authenticated])
   
   return (
     <div className={styles.container}>

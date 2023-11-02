@@ -22,7 +22,7 @@ export const useAuthentication = ()=>{
   const authUser = (data)=>{
 
     localStorage.setItem('token',JSON.stringify(data.token))
-    console.log(localStorage.getItem('token'))
+    console.log('oi')
     setAuthenticated(true)
     navigate('/')
   }
@@ -49,12 +49,9 @@ export const useAuthentication = ()=>{
 
   const authLogin = async(user)=>{
     try {
-      const data =await api.post('/user/login',user)
+      const data = await api.post('/user/login',user)
       .then((response)=>{
-        console.log(response.data);
         localStorage.setItem('token',response.data.token)
-      }).catch(function (error){
-        console.log(error.response.data.errors)
       })
       authUser(data)
 

@@ -1,13 +1,20 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Login.module.css'
 import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link, useNavigate} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
-
+import { useAuthContext } from '../../hooks/useAuthContext'
 const Login = () => {
   
   const {authLogin} = useAuthentication()
   const navigate = useNavigate()
+  const {authenticated} = useAuthContext()
+
+  useEffect(()=>{
+    if(authenticated){
+      navigate('/')
+    }
+  },[authenticated])
 
 
   const handleSubmit = (e)=>{
