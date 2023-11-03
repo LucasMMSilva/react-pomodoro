@@ -38,7 +38,7 @@ const Pomodoro = ({children}) => {
         <div className={styles.sidebar}>
           <NavLink to={'/createnewtask'} className={styles.newtask }>{'Create new task'}</NavLink>
           {tasks.current.map((task)=>(
-            <NavLink className={({isActive})=>isActive && styles.active} key={task._id} to={`/task/${task._id}`}>{task.title}</NavLink>
+            <NavLink className={({isActive})=>isActive ? styles.active : ''} key={task._id} to={`/task/${task._id}`}>{task.title}</NavLink>
           ))}
         </div>
         <div className={styles.pomodoro}>
