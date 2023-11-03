@@ -13,6 +13,10 @@
         font-weight: 400;
         display: block;
     }
+    .sidebar p{
+        text-align: center;
+        color: rgb(113, 113, 113);
+    }
 a.newtask{
     background-color: #e3e3e3;
     display: inline-block;

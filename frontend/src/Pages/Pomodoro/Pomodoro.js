@@ -7,6 +7,7 @@ const Pomodoro = ({children}) => {
 
   const navigate = useNavigate()
   const tasks = useRef([])
+  const [loading,setLoading] = useState(true)
   const {authenticated, setAuthenticated} = useAuthContext()
   const token = localStorage.getItem('token')
   
@@ -15,41 +16,47 @@ const Pomodoro = ({children}) => {
       navigate('/login')
     }
 
-    try {
-      if(token){
+    if(loading === true){
+      try {
+        if(token){
 
-        const getTasks = async()=>{
+          const getTasks = async()=>{
 
-          await api.get('/task/tasks',{
-          headers:{
-            authorization:`Bearer ${JSON.parse(token)}`
+            await api.get('/task/tasks',{
+            headers:{
+              authorization:`Bearer ${JSON.parse(token)}`
+
+            }
+            }).then((response)=>{
+              tasks.current = response.data
+              setLoading(false)
+            }).catch((error)=>{
+              console.log(error.response.data.errors)
+            })
 
           }
-          }).then((response)=>{
-            tasks.current = response.data
-          }).catch((error)=>{
-            console.log(error.response.data.errors)
-          })
-
+          getTasks()
         }
-        getTasks()
+      } catch (error) {
+        
       }
-
-    } catch (error) {
-      console.log(error.data)
     }
     
-  },[token,authenticated,tasks.current])
+  },[token,authenticated,loading])
   
   return (
     <div className={styles.container}>
         <div className={styles.sidebar}>
 
+          
+
           <NavLink to={'/createnewtask'} className={styles.newtask }>{'Create new task'}</NavLink>
 
-          {tasks.current.map((task)=>(
+          {!loading ? tasks.current.map((task)=>(
             <NavLink className={({isActive})=>isActive ? styles.active : ''} key={task._id} to={`/task/${task._id}`}>{task.title}</NavLink>
-          ))}
+          )):
+            <p>Loading...</p>
+          }
 
         </div>
         <div className={styles.pomodoro}>
