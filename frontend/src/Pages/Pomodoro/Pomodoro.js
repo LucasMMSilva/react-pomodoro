@@ -1,4 +1,4 @@
-import { useLayoutEffect,useRef, useState } from 'react'
+import { useEffect,useRef, useState } from 'react'
 import {NavLink,useNavigate} from 'react-router-dom'
 import styles from './Pomodoro.module.css'
 import api from '../../hooks/api'
@@ -11,7 +11,7 @@ const Pomodoro = ({children}) => {
   const {authenticated, setAuthenticated} = useAuthContext()
   const token = localStorage.getItem('token')
   
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     setLoading(true)
     if(!authenticated){
       navigate('/login')
@@ -19,22 +19,30 @@ const Pomodoro = ({children}) => {
 
     try {
       if(token){
-        api.get('/task/tasks',{
-        headers:{
-          Authorization:`Bearer ${JSON.parse(token)}`
+
+        const getTasks = async()=>{
+
+          await api.get('/task/tasks',{
+          headers:{
+            authorization:`Bearer ${JSON.parse(token)}`
+
+          }
+          }).then((response)=>{
+            tasks.current = response.data
+          }).catch((error)=>{
+            console.log(error.response.data.errors)
+          })
+
         }
-        }).then((response)=>{
-          tasks.current = response.data
-        }).catch((error)=>{
-          console.log(error.response.data.errors)
-        })
+        getTasks()
       }
+
     } catch (error) {
       console.log(error.data)
     }
     setLoading(false)
     
-  },[token,authenticated,tasks.current])
+  },[token,authenticated,tasks])
   
   return (
     <div className={styles.container}>
@@ -42,7 +50,6 @@ const Pomodoro = ({children}) => {
 
           <NavLink to={'/createnewtask'} className={styles.newtask }>{'Create new task'}</NavLink>
 
-          {tasks && <p>Teste</p>}
           {!loading ? ( tasks.current.map((task)=>(
             <NavLink className={({isActive})=>isActive ? styles.active : ''} key={task._id} to={`/task/${task._id}`}>{task.title}</NavLink>
           )) ) : 
