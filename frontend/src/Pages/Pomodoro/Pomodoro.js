@@ -6,13 +6,11 @@ import {useAuthContext} from '../../hooks/useAuthContext'
 const Pomodoro = ({children}) => {
 
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
   const tasks = useRef([])
   const {authenticated, setAuthenticated} = useAuthContext()
   const token = localStorage.getItem('token')
   
   useEffect(()=>{
-    setLoading(true)
     if(!authenticated){
       navigate('/login')
     }
@@ -40,9 +38,8 @@ const Pomodoro = ({children}) => {
     } catch (error) {
       console.log(error.data)
     }
-    setLoading(false)
     
-  },[token,authenticated,tasks])
+  },[token,authenticated,tasks.current])
   
   return (
     <div className={styles.container}>
@@ -50,10 +47,9 @@ const Pomodoro = ({children}) => {
 
           <NavLink to={'/createnewtask'} className={styles.newtask }>{'Create new task'}</NavLink>
 
-          {!loading ? ( tasks.current.map((task)=>(
+          {tasks.current.map((task)=>(
             <NavLink className={({isActive})=>isActive ? styles.active : ''} key={task._id} to={`/task/${task._id}`}>{task.title}</NavLink>
-          )) ) : 
-          ( <p>Loading</p> ) }
+          ))}
 
         </div>
         <div className={styles.pomodoro}>
