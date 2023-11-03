@@ -9,8 +9,6 @@ const Pomodoro = ({children}) => {
   const [tasks, setTasks] = useState([])
   const {authenticated, setAuthenticated} = useAuthContext()
   const token = localStorage.getItem('token')
-
-
   
   useEffect(()=>{
     if(!authenticated){
@@ -23,12 +21,14 @@ const Pomodoro = ({children}) => {
           Authorization:`Bearer ${JSON.parse(token)}`
         }
         }).then((response)=>{
-          setTasks(response.data.tasks)
-          console.log(response.data)
+          setTasks(response.data)
+          console.log(tasks)
+        }).catch((error)=>{
+          console.log(error.response.data.errors)
         })
       }
     } catch (error) {
-      
+      console.log(error.data)
     }
     
   },[token,authenticated])
@@ -38,7 +38,7 @@ const Pomodoro = ({children}) => {
         <div className={styles.sidebar}>
           <NavLink to={'/createnewtask'} className={styles.newtask }>{'Create new task'}</NavLink>
           {tasks.map((task)=>(
-            <NavLink className={({isActive})=>isActive && styles.active} key={task.id} to={`/task/${task.id}`}>{task.name}</NavLink>
+            <NavLink /*className={({isActive})=>isActive && styles.active}*/ key={task._id} to={`/task/${task._id}`}>{task.name}</NavLink>
           ))}
         </div>
         <div className={styles.pomodoro}>
