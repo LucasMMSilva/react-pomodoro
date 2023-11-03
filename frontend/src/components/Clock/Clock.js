@@ -5,7 +5,7 @@ import api from '../../hooks/api';
 const Clock = () => {
     const initiar = useRef();
     const {id} = useParams()
-    const [task,setTask] = useState([])
+    const task = useRef([])
     const [louding,setLouding] = useState(true)
     const [minute,setMinute] = useState(0)
     const [seconde,setSeconde] = useState(0)
@@ -21,7 +21,7 @@ const Clock = () => {
             Authorization:`Bearer ${JSON.parse(token)}`
           }
           }).then((response)=>{
-            setTask(response.data.tasks)
+            task.current = response.data
             console.log(task)
           })
         }
@@ -33,20 +33,20 @@ const Clock = () => {
 
     useEffect(()=>{
         setLouding(true)
-        contador()
+        //contador()
         
             if(task){
-                setMinute(task.pomodoro)
+                setMinute(task.current.mainTime)
                 setSeconde(0)
             }
        
        setLouding(false)
-       return contador()
+       //return contador()
     },[id,task])
 
-    const contador = ()=>{setInterval(()=>{
+    /*const contador = ()=>{setInterval(()=>{
         console.log(minute+':'+seconde)
-    },5000)}
+    },5000)}*/
 
     const countDown = ()=>{
 
@@ -88,7 +88,7 @@ const Clock = () => {
             <div className={styles.container}>
                 
                 <div className={styles.header}>
-                    <h2>{task.name}</h2>
+                    <h2>{task.current.title}</h2>
                     <p>5:00h</p>
                 </div>
                 <div className={styles.buttoncontainer}>

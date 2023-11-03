@@ -22,11 +22,9 @@ export const useAuthentication = ()=>{
   },[])
 
   const authUser = (data)=>{
-
     localStorage.setItem('token',JSON.stringify(data.token))
-    console.log(data)
     setAuthenticated(true)
-    //navigate('/')
+    navigate('/')
   }
 
   const logout = ()=>{
