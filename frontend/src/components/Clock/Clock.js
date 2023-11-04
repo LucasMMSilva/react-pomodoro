@@ -22,14 +22,14 @@ const Clock = () => {
           }
           }).then((response)=>{
             task.current = response.data
-            console.log(task)
+            console.log(task.current.title)
           })
         }
         } catch (error) {
           
         }
         
-      },[])
+      },[id])
 
     useEffect(()=>{
         setLouding(true)

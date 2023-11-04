@@ -14,4 +14,10 @@
 }
 .navbar button{
     width: 50px;
+    align-items: center;
+}
+.navbar button svg{
+    display: flex;
+    align-items: center;
+    justify-items: center;
 }
