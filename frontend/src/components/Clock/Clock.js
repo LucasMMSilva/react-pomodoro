@@ -45,7 +45,7 @@ const Clock = () => {
             
             }
 
-            if(task){
+            if(mainTime){
                 setMinute(mainTime)
                 setSeconde(0)    
             }
@@ -56,7 +56,7 @@ const Clock = () => {
             }, 1);
         }
         
-    },[count,id,task,louding])
+    },[count,id,task,louding,mainTime])
     
     const contador = ()=>{setInterval(()=>{
         console.log(minute+':'+seconde)
