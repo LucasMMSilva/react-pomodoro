@@ -3,9 +3,12 @@ import {createContext,useRef} from 'react'
 export const TaskContext = createContext()
 
 export const TaskContextProvider = ({children}) => {
-    const tasks = useRef([])
+    const tasksRef = useRef([])
+    const setTasks = (myTasks)=>{
+        tasksRef.current = myTasks
+    }
     return(
-        <TaskContext.Provider value={tasks}>
+        <TaskContext.Provider value={{tasksRef,setTasks}}>
             {children}
         </TaskContext.Provider>
     )

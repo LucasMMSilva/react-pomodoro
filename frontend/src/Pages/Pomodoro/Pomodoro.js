@@ -7,10 +7,12 @@ import { useTaskContext } from '../../hooks/useTaskContext'
 
 const Pomodoro = ({children}) => {
 
+  // Hooks
   const navigate = useNavigate()
-  const {tasks} = useTaskContext()
   const [loading,setLoading] = useState(true)
-  const {authenticated, setAuthenticated} = useAuthContext()
+  const {tasksRef,setTasksRef} = useTaskContext()
+  const {authenticated} = useAuthContext()
+
   const token = localStorage.getItem('token')
   
   useEffect(()=>{
@@ -22,7 +24,7 @@ const Pomodoro = ({children}) => {
       try {
         if(token){
 
-          const getTasks = async()=>{
+          const getTasksRef = async()=>{
 
             await api.get('/task/tasks',{
             headers:{
@@ -30,14 +32,14 @@ const Pomodoro = ({children}) => {
 
             }
             }).then((response)=>{
-              tasks.current = response.data
+              tasksRef.current = response.data
               setLoading(false)
             }).catch((error)=>{
-              console.log(error.response.data.errors)
+              console.log(error.response.data)
             })
 
           }
-          getTasks()
+          getTasksRef()
         }
       } catch (error) {
         
@@ -54,7 +56,7 @@ const Pomodoro = ({children}) => {
 
           <NavLink to={'/createnewtask'} className={styles.newtask }>{'Create new task'}</NavLink>
 
-          {!loading ? tasks.current.map((task)=>(
+          {!loading ? tasksRef.current.map((task)=>(
             <NavLink className={({isActive})=>isActive ? styles.active : ''} key={task._id} to={`/task/${task._id}`}>{task.title}</NavLink>
           )):
             <p>Loading...</p>

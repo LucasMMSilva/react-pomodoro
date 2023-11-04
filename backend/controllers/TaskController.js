@@ -27,6 +27,10 @@ const createTask = async(req,res) =>{
 const getAllTaskByUser = async (req,res)=>{
     const userId = req.user.id
     const tasks = await Task.find({userId})
+    if(!tasks){
+        res.status(404).json({errors:['Tasks not found.']})
+        return
+    }
     res.status(200).json(tasks)
 }
 
