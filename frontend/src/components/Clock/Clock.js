@@ -10,6 +10,13 @@ const Clock = () => {
     const task = useRef([])
     const {tasksRef} = useTaskContext()
     const [louding,setLouding] = useState(true)
+
+    const [title,setTitle] = useState('')
+    const [time,setTime] = useState(0)
+    const [mainTime,setMainTime] = useState(0)
+    const [short,setShort] = useState(0)
+    const [long,setLong] = useState(0)
+
     const [minute,setMinute] = useState(0)
     const [seconde,setSeconde] = useState(0)
     const [isPaused,setIsPaused] = useState(true)
@@ -26,7 +33,11 @@ const Clock = () => {
                     
                     tasksRef.current.forEach((element) => {
                         if(element._id === id){
-                            task.current = element
+                            setTitle(element.title)
+                            setTime(element.time)
+                            setMainTime(element.mainTime)
+                            setShort(element.short)
+                            setLong(element.long)
                         }
                     });
                     
@@ -35,12 +46,12 @@ const Clock = () => {
             }
 
             if(task){
-                setMinute(task.current.mainTime)
+                setMinute(mainTime)
                 setSeconde(0)    
             }
             setLouding(false)
         }else{
-            setTimeout(function() {
+            setTimeout(()=>{
                 setcount(count+1)
             }, 1);
         }
@@ -93,8 +104,8 @@ const Clock = () => {
             <div className={styles.container}>
                 
                 <div className={styles.header}>
-                    <h2>{task.current.title}</h2>
-                    <p>5:00h</p>
+                    <h2>{title}</h2>
+                    <p>{time}</p>
                 </div>
                 <div className={styles.buttoncontainer}>
                     <button className={currentFunction === "POMODORO" ? (styles.bluebutton) : ('')} >Pomodoro</button>
