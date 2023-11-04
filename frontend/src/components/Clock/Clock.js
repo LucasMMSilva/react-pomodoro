@@ -1,11 +1,13 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Clock.module.css'
 import { useParams } from 'react-router-dom'
+import { useTaskContext } from '../../hooks/useTaskContext';
 import api from '../../hooks/api';
 const Clock = () => {
     const initiar = useRef();
     const {id} = useParams()
     const task = useRef([])
+    const {tasksRef} = useTaskContext()
     const [louding,setLouding] = useState(true)
     const [minute,setMinute] = useState(0)
     const [seconde,setSeconde] = useState(0)
@@ -19,22 +21,11 @@ const Clock = () => {
         setLouding(true)
         if(token){
             try {
-            
-                async function getTask(){
-                    await api.get(`/task/${id}`,{
-                        headers:{
-                            Authorization:`Bearer ${JSON.parse(token)}`
-                        }
-                    }).then((response)=>{
-                        task.current = response.data
-                        console.log(task.current.title)
-                    }).catch((err)=>{
-                        console.log(err.response.data.errors)
-                    })
-                    setLouding(false)
-                } 
-                getTask()
-    
+                
+                tasksRef.forEach((element) => {
+                    console.log('element')
+                });
+                
             } catch (error) {}
             
         }
@@ -42,7 +33,8 @@ const Clock = () => {
             setMinute(task.current.mainTime)
             setSeconde(0)
         }
-       
+       setLouding(false)
+
     },[id,task,louding])
 
     const contador = ()=>{setInterval(()=>{

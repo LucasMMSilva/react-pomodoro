@@ -10,7 +10,7 @@ const Pomodoro = ({children}) => {
   // Hooks
   const navigate = useNavigate()
   const [loading,setLoading] = useState(true)
-  const {tasksRef,setTasksRef} = useTaskContext()
+  const {tasksRef} = useTaskContext()
   const {authenticated} = useAuthContext()
 
   const token = localStorage.getItem('token')
