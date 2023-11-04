@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Clock.module.css'
 import { useParams } from 'react-router-dom'
 import { useTaskContext } from '../../hooks/useTaskContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import api from '../../hooks/api';
 const Clock = () => {
     const initiar = useRef();
@@ -13,30 +14,39 @@ const Clock = () => {
     const [seconde,setSeconde] = useState(0)
     const [isPaused,setIsPaused] = useState(true)
     const [currentFunction,setCurrentFunction] = useState('POMODORO')
-    const token = localStorage.getItem('token')
+    const {authenticated} = useAuthContext()
 
-
+    const [count, setcount] = useState(0)
+    
     useEffect(()=>{
-
         setLouding(true)
-        if(token){
-            try {
-                
-                tasksRef.forEach((element) => {
-                    console.log('element')
-                });
-                
-            } catch (error) {}
+        if(tasksRef.current.length > 0){
+            if(authenticated){
+                try {
+                    
+                    tasksRef.current.forEach((element) => {
+                        if(element._id === id){
+                            task.current = element
+                        }
+                    });
+                    
+                } catch (error) {}
             
-        }
-        if(task){
-            setMinute(task.current.mainTime)
-            setSeconde(0)
-        }
-       setLouding(false)
+            }
 
-    },[id,task,louding])
-
+            if(task){
+                setMinute(task.current.mainTime)
+                setSeconde(0)    
+            }
+            setLouding(false)
+        }else{
+            setTimeout(function() {
+                setcount(count+1)
+            }, 1);
+        }
+        
+    },[count,id,task,louding])
+    
     const contador = ()=>{setInterval(()=>{
         console.log(minute+':'+seconde)
     },5000)}
@@ -69,10 +79,12 @@ const Clock = () => {
             pause()
         }
     }
+    
     const pause = ()=>{
         setIsPaused(true)
         clearInterval(initiar.current)
     }
+
   return (
     <>  
         {louding == true && (<p className={styles.louding}>Carregando...</p>)}

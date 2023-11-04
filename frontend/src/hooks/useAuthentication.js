@@ -2,7 +2,7 @@ import api from './api'
 import {useEffect,useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useAuthContext } from './useAuthContext'
-
+import { useTaskContext } from './useTaskContext'
 
 export const useAuthentication = ()=>{
   const [loading,setLoading] = useState(false)
@@ -10,6 +10,7 @@ export const useAuthentication = ()=>{
   const navigate = useNavigate()
 
   const {authenticated,setAuthenticated} = useAuthContext()
+  const {tasksRef} = useTaskContext()
 
   useEffect(()=>{
     setLoading(true)
@@ -31,6 +32,7 @@ export const useAuthentication = ()=>{
     localStorage.removeItem('token')
     api.defaults.headers.Authorization = undefined
     setAuthenticated(false)
+    tasksRef.current = [{}]
     navigate('/login')
   }
 

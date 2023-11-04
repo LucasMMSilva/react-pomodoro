@@ -1,4 +1,4 @@
-import { useEffect,useRef, useState } from 'react'
+import { useLayoutEffect,useRef, useState } from 'react'
 import {NavLink,useNavigate} from 'react-router-dom'
 import styles from './Pomodoro.module.css'
 import api from '../../hooks/api'
@@ -15,7 +15,7 @@ const Pomodoro = ({children}) => {
 
   const token = localStorage.getItem('token')
   
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     if(!authenticated){
       navigate('/login')
     }
