@@ -13,40 +13,41 @@ const Clock = () => {
     const [currentFunction,setCurrentFunction] = useState('POMODORO')
     const token = localStorage.getItem('token')
 
-    useLayoutEffect(()=>{
-        try {
-          if(token){
-          api.get(`/task/${id}`,{
-          headers:{
-            Authorization:`Bearer ${JSON.parse(token)}`
-          }
-          }).then((response)=>{
-            task.current = response.data
-            console.log(task.current.title)
-          })
-        }
-        } catch (error) {
-          
-        }
-        
-      },[id])
 
     useEffect(()=>{
-        setLouding(true)
-        //contador()
-        
-            if(task){
-                setMinute(task.current.mainTime)
-                setSeconde(0)
-            }
-       
-       setLouding(false)
-       //return contador()
-    },[id,task])
 
-    /*const contador = ()=>{setInterval(()=>{
+        setLouding(true)
+        if(token){
+            try {
+            
+                async function getTask(){
+                    await api.get(`/task/${id}`,{
+                        headers:{
+                            Authorization:`Bearer ${JSON.parse(token)}`
+                        }
+                    }).then((response)=>{
+                        task.current = response.data
+                        console.log(task.current.title)
+                    }).catch((err)=>{
+                        console.log(err.response.data.errors)
+                    })
+                    setLouding(false)
+                } 
+                getTask()
+    
+            } catch (error) {}
+            
+        }
+        if(task){
+            setMinute(task.current.mainTime)
+            setSeconde(0)
+        }
+       
+    },[id,task,louding])
+
+    const contador = ()=>{setInterval(()=>{
         console.log(minute+':'+seconde)
-    },5000)}*/
+    },5000)}
 
     const countDown = ()=>{
 
@@ -82,7 +83,7 @@ const Clock = () => {
     }
   return (
     <>  
-        {louding == true && (<p>Carregando</p>)}
+        {louding == true && (<p className={styles.louding}>Carregando...</p>)}
         {louding == false && (
             
             <div className={styles.container}>

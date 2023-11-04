@@ -3,10 +3,12 @@ import {NavLink,useNavigate} from 'react-router-dom'
 import styles from './Pomodoro.module.css'
 import api from '../../hooks/api'
 import {useAuthContext} from '../../hooks/useAuthContext'
+import { useTaskContext } from '../../hooks/useTaskContext'
+
 const Pomodoro = ({children}) => {
 
   const navigate = useNavigate()
-  const tasks = useRef([])
+  const {tasks} = useTaskContext()
   const [loading,setLoading] = useState(true)
   const {authenticated, setAuthenticated} = useAuthContext()
   const token = localStorage.getItem('token')
