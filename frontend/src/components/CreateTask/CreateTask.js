@@ -1,6 +1,29 @@
+import { useTaskAuth } from '../../hooks/useTaskAuth'
 import InputLabel from '../InputLabel/InputLabel'
 import styles from './CreateTask.module.css'
+import { useTaskAuth } from '../../hooks/useTaskAuth'
+
+
+
 const CreateTask = ()=>{
+
+    const {createTask} = useTaskAuth()
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault()
+
+        const task = {
+            title:e.target[0].value,
+            mainTime:e.target[1].value,
+            short:e.target[2].value,
+            long:e.target[3].value
+        }
+
+        console.log(task)
+        createTask(task)
+    }
+
     return(
         <div className={styles.container}>
             <div className={styles.header}>
@@ -8,11 +31,11 @@ const CreateTask = ()=>{
                 <p>Configure your new task</p>
             </div>
             <div>
-                <form>
-                    <InputLabel label='Name' name='name' type='text' placeholder='Enter the task name'/>
+                <form onSubmit={handleSubmit}>
+                    <InputLabel label='Title' name='title' type='text' placeholder='Enter the task name'/>
                     <p className={styles.timerconfigheader}>Timer settings <span>{'( In minutes )'}</span></p>
                     <div className={styles.timerconfig}>
-                        <InputLabel label='Pomodoro' name='pomodoro' type='number' value='25'/>
+                        <InputLabel label='Pomodoro Time' name='mainTimer' type='number' value='25'/>
                         <InputLabel label='Short Break' name='short' type='number' value='5'/>
                         <InputLabel label='Long Break' name='long' type='number' value='15'/>
                     </div>

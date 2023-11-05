@@ -34,7 +34,7 @@ const Clock = () => {
                     tasksRef.current.forEach((element) => {
                         if(element._id === id){
                             setTitle(element.title)
-                            setTime(element.time)
+                            setTime(element.time||0)
                             setMainTime(element.mainTime)
                             setShort(element.short)
                             setLong(element.long)
@@ -105,7 +105,7 @@ const Clock = () => {
                 
                 <div className={styles.header}>
                     <h2>{title}</h2>
-                    <p>{time}</p>
+                    <p>{time}h</p>
                 </div>
                 <div className={styles.buttoncontainer}>
                     <button className={currentFunction === "POMODORO" ? (styles.bluebutton) : ('')} >Pomodoro</button>
