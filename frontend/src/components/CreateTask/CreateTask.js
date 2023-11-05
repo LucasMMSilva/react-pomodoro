@@ -1,7 +1,6 @@
 import { useTaskAuth } from '../../hooks/useTaskAuth'
 import InputLabel from '../InputLabel/InputLabel'
 import styles from './CreateTask.module.css'
-import { useTaskAuth } from '../../hooks/useTaskAuth'
 
 
 
@@ -20,7 +19,6 @@ const CreateTask = ()=>{
             long:e.target[3].value
         }
 
-        console.log(task)
         createTask(task)
     }
 
