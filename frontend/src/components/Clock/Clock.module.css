@@ -48,16 +48,17 @@ div.events{
 div.events button{
     width: auto;
     background-color: transparent;
-    color: #000;
     margin-right: 20px;
+    font-size: 1.3em;
 }
 div.events button.edit{
-    color: #00dd55;
+    color: #008d36;
 }
 div.events button.delete{
-    color: #dd0012;
+    color: #d10011;
 }
 div.events button:hover{
     font-weight: 500;
     text-decoration: underline;
+
 }

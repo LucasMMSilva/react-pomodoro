@@ -1,13 +1,18 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Clock.module.css'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { useTaskContext } from '../../hooks/useTaskContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useClockEvents } from '../../hooks/useClockEvents';
+
+import { BiSolidEdit } from 'react-icons/bi';
+import { AiFillDelete } from 'react-icons/ai';
+
 import api from '../../hooks/api';
 const Clock = () => {
     const initiar = useRef();
     const {id} = useParams()
+    const navigate = useNavigate()
     const task = useRef([])
     const {tasksRef} = useTaskContext()
     const [louding,setLouding] = useState(true)
@@ -99,7 +104,7 @@ const Clock = () => {
     }
 
     const editTask = () => {
-        editTaskById(id)
+        navigate(`/edittask/${id}`)
     }
 
     const deleteTask = () => {
@@ -113,8 +118,8 @@ const Clock = () => {
             
             <div className={styles.container}>
                 <div className={styles.events}>
-                    <button onClick={editTask} className={styles.edit}>Edit</button>
-                    <button onClick={deleteTask} className={styles.delete}>Delete</button>
+                    <button onClick={editTask} className={styles.edit}><BiSolidEdit/></button>
+                    <button onClick={deleteTask} className={styles.delete}><AiFillDelete/></button>
                 </div>
                 <div className={styles.header}>
                     <h2>{title}</h2>

@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login';
 import Clock from './components/Clock/Clock'
 import CreateTask from './components/CreateTask/CreateTask'
 import Welcome from './components/Welcome/Welcome';
+import EditTask from './components/EditTask/EditTask';
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,9 @@ function App() {
             <Route path='/' element={<Pomodoro><Welcome/></Pomodoro>}/>
             <Route path='/createnewtask' element={<Pomodoro>
               <CreateTask/>
+            </Pomodoro>}/>
+            <Route path='/edittask/:id' element={<Pomodoro>
+              <EditTask/>
             </Pomodoro>}/>
             <Route path='/task/:id' element={<Pomodoro>
               <Clock/>

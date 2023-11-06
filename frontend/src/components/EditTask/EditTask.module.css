@@ -1,0 +1,47 @@
+.container{
+    width: 550px;
+    margin: 20px auto;
+}
+.header{
+    margin-bottom: 5px;
+}
+.header h2{
+    color: rgb(70, 70, 70);
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.header p{
+    color: grey;
+    font-size: 1.1em;
+    font-weight: 200;
+}
+.timerconfig{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+}
+.timerconfigheader span{
+    color: grey;
+}
+.timerconfig div{
+    width: 99%;
+}
+.timerconfig div:nth-child(2){
+    justify-self: center;
+}
+.timerconfig div:first-child{
+    justify-self: left;
+}
+.timerconfig div:last-child{
+    justify-self: right;
+}
+button{
+    margin: 2px 2px;
+    width: 130px;
+    padding: 4px 0;
+    background-color: #0080DD;
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+}

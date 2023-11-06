@@ -9,7 +9,7 @@
     padding-top: 20px;
     box-sizing: border-box;
     padding-bottom: 50px;
-    overflow-y:scroll;
+    overflow-y: visible;
     max-height: calc(100vh - 40px);
     overflow-x: hidden;
 }
@@ -21,6 +21,7 @@
         font-weight: 400;
         display: block;
         width: 220px;
+        margin-bottom: 6px;
     }
     
     .sidebar p{

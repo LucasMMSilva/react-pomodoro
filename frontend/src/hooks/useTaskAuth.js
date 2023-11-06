@@ -38,5 +38,25 @@ export const useTaskAuth = () => {
         }
     }
 
-    return {createTask}
+    const editTask = async(task) =>{
+        var data;
+        const taskData = task
+        if(token){
+            await api.put(`/task/${taskData._id}`,taskData,{
+                headers:{
+                  authorization:`Bearer ${JSON.parse(token)}`
+                }})
+                .then((response)=>{
+                    tasksRef.current.push(response.data)
+                    navigate(`/task/${response.data._id}`)
+                    
+                }).catch((err)=>{
+                    console.log(err.response.data.errors)
+                })
+        }
+    }
+
+
+
+    return {createTask,editTask}
 }
