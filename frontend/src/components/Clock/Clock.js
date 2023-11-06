@@ -97,13 +97,24 @@ const Clock = () => {
         clearInterval(initiar.current)
     }
 
+    const editTask = () => {
+
+    }
+
+    const deleteTask = () => {
+        
+    }
+
   return (
     <>  
         {louding == true && (<p className={styles.louding}>Carregando...</p>)}
         {louding == false && (
             
             <div className={styles.container}>
-                
+                <div className={styles.events}>
+                    <button className={styles.edit}>Edit</button>
+                    <button className={styles.delete}>Delete</button>
+                </div>
                 <div className={styles.header}>
                     <h2>{title}</h2>
                     <p>{time}h</p>

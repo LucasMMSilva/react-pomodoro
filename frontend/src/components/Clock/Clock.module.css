@@ -4,6 +4,7 @@
 }
 .header{
     margin-bottom: 5px;
+    clear: right;
 }
 .header h2{
     color: rgb(70, 70, 70);
@@ -36,4 +37,27 @@
 }
 p.louding{
     color: gray;
+}
+
+div.events{
+    float: right;
+    display: inline;
+    margin-right: 20px;
+    margin-top: -5px;
+}
+div.events button{
+    width: auto;
+    background-color: transparent;
+    color: #000;
+    margin-right: 20px;
+}
+div.events button.edit{
+    color: #00dd55;
+}
+div.events button.delete{
+    color: #dd0012;
+}
+div.events button:hover{
+    font-weight: 500;
+    text-decoration: underline;
 }
