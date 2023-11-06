@@ -5,6 +5,7 @@
 .sidebar{
     padding-left: 20px;
     padding-top: 20px;
+    box-sizing: border-box;
 }
     .sidebar a{
         text-decoration: none;
@@ -26,8 +27,9 @@ a.newtask{
     font-size: 1.2em;
     padding: 2px 30px;
     margin-bottom: 15px;
+    
 }
 a.active{
     color: gray;
-    text-indent: 10px;
+    padding-left: 15px;
 }

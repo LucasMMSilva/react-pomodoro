@@ -1,11 +1,13 @@
 import api from './api'
 import { useAuthContext } from './useAuthContext'
 import {useState,useEffect} from 'react'
-
+import { useNavigate } from 'react-router-dom'
 export const useTaskAuth = () => {
     const {authenticad,setAuthenticated} = useAuthContext()
     const [loading,setLoading] = useState(true)
     const [token,setToken] = useState('')
+    const navigate = useNavigate()
+
     useEffect(()=>{
         setLoading(true)
         setToken(localStorage.getItem('token'))
@@ -25,7 +27,8 @@ export const useTaskAuth = () => {
                   authorization:`Bearer ${JSON.parse(token)}`
                 }})
                 .then((response)=>{
-                    console.log(response.data)
+                    navigate(`/task/${response.data._id}`)
+                    
                 }).catch((err)=>{
                     console.log(err.response.data.errors)
                 })

@@ -27,7 +27,7 @@ const Clock = () => {
     
     useEffect(()=>{
         setLouding(true)
-        if(tasksRef.current.length > 0){
+        if(tasksRef.current.length > 0 ){
             if(authenticated){
                 try {
                     
@@ -53,6 +53,7 @@ const Clock = () => {
         }else{
             setTimeout(()=>{
                 setcount(count+1)
+                console.log(count)
             }, 1);
         }
         
