@@ -3,6 +3,7 @@ import styles from './Clock.module.css'
 import { useParams } from 'react-router-dom'
 import { useTaskContext } from '../../hooks/useTaskContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useClockEvents } from '../../hooks/useClockEvents';
 import api from '../../hooks/api';
 const Clock = () => {
     const initiar = useRef();
@@ -22,7 +23,7 @@ const Clock = () => {
     const [isPaused,setIsPaused] = useState(true)
     const [currentFunction,setCurrentFunction] = useState('POMODORO')
     const {authenticated} = useAuthContext()
-
+    const {editTaskById, deleteTaskById} = useClockEvents()
     const [count, setcount] = useState(0)
     
     useEffect(()=>{
@@ -98,11 +99,11 @@ const Clock = () => {
     }
 
     const editTask = () => {
-
+        editTaskById(id)
     }
 
     const deleteTask = () => {
-        
+        deleteTaskById(id)
     }
 
   return (
@@ -112,8 +113,8 @@ const Clock = () => {
             
             <div className={styles.container}>
                 <div className={styles.events}>
-                    <button className={styles.edit}>Edit</button>
-                    <button className={styles.delete}>Delete</button>
+                    <button onClick={editTask} className={styles.edit}>Edit</button>
+                    <button onClick={deleteTask} className={styles.delete}>Delete</button>
                 </div>
                 <div className={styles.header}>
                     <h2>{title}</h2>
