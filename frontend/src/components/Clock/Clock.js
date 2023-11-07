@@ -97,7 +97,7 @@ const Clock = () => {
                     <h1>{minute<=9 && minute>=0 &&(<>0</>)}{minute}:{seconde<=9 && seconde>=0 && (<>0</>)}{seconde}</h1>
                 </div>
                 <div className={styles.buttoncontainer}>
-                   <button className={styles.bluebutton}></button>
+                   <button className={styles.bluebutton}>Start</button>
                 </div>
             </div>)
         }

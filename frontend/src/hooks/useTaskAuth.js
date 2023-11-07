@@ -24,7 +24,7 @@ export const useTaskAuth = () => {
         var data;
         const taskData = task
         if(token){
-            await api.post('/task/createtask',taskData,{
+            await api.post('/task/createtask/',taskData,{
                 headers:{
                   authorization:`Bearer ${JSON.parse(token)}`
                 }})
@@ -42,12 +42,17 @@ export const useTaskAuth = () => {
         var data;
         const taskData = task
         if(token){
-            await api.put(`/task/${taskData._id}`,taskData,{
+            await api.put(`/task/${taskData.id}`,taskData,{
                 headers:{
                   authorization:`Bearer ${JSON.parse(token)}`
                 }})
                 .then((response)=>{
-                    tasksRef.current.push(response.data)
+
+                    tasksRef.current.forEach(element => {
+                        if(element._id === response._id){
+                            element = response
+                        }
+                    });
                     navigate(`/task/${response.data._id}`)
                     
                 }).catch((err)=>{

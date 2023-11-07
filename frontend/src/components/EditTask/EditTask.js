@@ -71,6 +71,7 @@ const EditTask = ()=>{
         e.preventDefault()
 
         const task = {
+            id:id,
             title:e.target[0].value,
             mainTime:e.target[1].value,
             short:e.target[2].value,

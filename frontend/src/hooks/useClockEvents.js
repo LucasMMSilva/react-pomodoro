@@ -29,10 +29,7 @@ export const useClockEvents = () => {
         })
 
     }
-    const editTaskById = async(id) =>{
-        console.log('editar')
-    }
 
 
-    return {deleteTaskById,editTaskById}
+    return {deleteTaskById}
 }
