@@ -32,6 +32,10 @@ const Clock = () => {
     const [count, setcount] = useState(0)
     
     useEffect(()=>{
+        somethingWrong()
+    },[louding])
+
+    useEffect(()=>{
         setLouding(true)
         if(tasksRef.current.length > 0 ){
             if(authenticated){
@@ -62,12 +66,21 @@ const Clock = () => {
                 console.log(count)
             }, 1);
         }
+
         
     },[count,id,task,louding,mainTime])
     
     const contador = ()=>{setInterval(()=>{
         console.log(minute+':'+seconde)
     },5000)}
+
+    function somethingWrong(){
+        setTimeout(() => {
+            if(louding){
+                navigate('/error')
+            }
+        }, 8000);
+    }
 
     const countDown = ()=>{
 

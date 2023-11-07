@@ -8,6 +8,7 @@ import Clock from './components/Clock/Clock'
 import CreateTask from './components/CreateTask/CreateTask'
 import Welcome from './components/Welcome/Welcome';
 import EditTask from './components/EditTask/EditTask';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,9 @@ function App() {
             </Pomodoro>}/>
             <Route path='/task/:id' element={<Pomodoro>
               <Clock/>
+            </Pomodoro>}/>
+            <Route path='/error' element={<Pomodoro>
+              <ErrorPage/>
             </Pomodoro>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
