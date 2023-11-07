@@ -65,45 +65,6 @@ const Clock = () => {
 
         
     },[count,id,task,louding,mainTime])
-    
-    const contador = ()=>{setInterval(()=>{
-        console.log(minute+':'+seconde)
-    },5000)}
-
-
-    const countDown = ()=>{
-
-        if(minute>0 || seconde>0){
-            if(seconde == 0){
-                setSeconde((prev)=>prev + 59)
-                setMinute((prev)=>prev - 1)
-                
-            }else{
-                setSeconde((prev)=>prev - 1)
-            }
-        }else{
-            pause()
-        }
-
-        
-    }
-    const initialize = ()=>{
-         
-        if(isPaused){
-            setIsPaused(false)
-            
-            initiar.current = setInterval(()=>{
-                countDown()             
-            },1000)
-        }else{
-            pause()
-        }
-    }
-    
-    const pause = ()=>{
-        setIsPaused(true)
-        clearInterval(initiar.current)
-    }
 
     const editTask = () => {
         navigate(`/edittask/${id}`)
@@ -136,7 +97,7 @@ const Clock = () => {
                     <h1>{minute<=9 && minute>=0 &&(<>0</>)}{minute}:{seconde<=9 && seconde>=0 && (<>0</>)}{seconde}</h1>
                 </div>
                 <div className={styles.buttoncontainer}>
-                   <button className={styles.bluebutton} onClick={initialize}>{isPaused ? (<>Start</>):(<>Pausar</>)}</button>
+                   <button className={styles.bluebutton}></button>
                 </div>
             </div>)
         }
