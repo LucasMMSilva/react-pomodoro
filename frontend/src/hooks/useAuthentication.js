@@ -6,7 +6,6 @@ import { useTaskContext } from './useTaskContext'
 
 export const useAuthentication = ()=>{
   const [loading,setLoading] = useState(false)
-
   const navigate = useNavigate()
 
   const {authenticated,setAuthenticated} = useAuthContext()
@@ -22,14 +21,16 @@ export const useAuthentication = ()=>{
     setLoading(false)
   },[])
 
-  const authUser = (data)=>{
+  const authUser = async (data)=>{
     localStorage.setItem('token',JSON.stringify(data.token))
+    localStorage.setItem('userid',JSON.stringify(data._id))
     setAuthenticated(true)
     navigate('/')
   }
 
   const logout = ()=>{
     localStorage.removeItem('token')
+    localStorage.removeItem('userid')
     api.defaults.headers.Authorization = undefined
     setAuthenticated(false)
     tasksRef.current = [{}]
@@ -64,5 +65,23 @@ export const useAuthentication = ()=>{
 
   }
 
-  return {authRegister,authLogin,logout}
+  const verifyUserId = async(id)=>{ 
+    let data 
+    const userId = JSON.parse(localStorage.getItem('userid'))
+    const token = localStorage.getItem('token')
+    
+    if(token){
+      await api.get(`/task/${id}`,{
+      headers:{
+        authorization:`Bearer ${JSON.parse(token)}`
+      }})
+      .then((response)=>{
+        data = response.data.userId
+      })
+    }
+
+    return data === userId ? true : false
+  }
+
+  return {authRegister,authLogin,logout,verifyUserId}
 }

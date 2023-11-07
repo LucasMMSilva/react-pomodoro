@@ -1,27 +1,66 @@
 import { useTaskAuth } from '../../hooks/useTaskAuth'
 import InputLabel from '../InputLabel/InputLabel'
 import styles from './EditTask.module.css'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { useTaskContext } from '../../hooks/useTaskContext' 
-import { useEffect, useState } from 'react'
-
+import { useEffect, useLayoutEffect, useState } from 'react'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import { useAuthentication } from '../../hooks/useAuthentication'
 const EditTask = ()=>{
 
     const {id} = useParams()
     const {tasksRef} = useTaskContext()
 
     const [task, setTask] = useState([])
-    const [louding,setLoading] = useState(true)
+    const [louding,setLouding] = useState(true)
+    const [count,setCount] = useState(0)
+    const [isAdept,setIsAdept] = useState(false)
+    
+    const {authenticated} = useAuthContext()
+    const {verifyUserId} = useAuthentication()
+    const navigate = useNavigate()
 
-    useEffect(()=>{
-        setLoading(true)
-        tasksRef.current.forEach((element)=>{
-            if(element._id === id){
-                setTask(element)
-                setLoading(false)
+    useLayoutEffect(()=>{
+        const verify = verifyUserId(id)
+        verify.then((response)=>{
+            if(!response){
+                navigate('/')
+            }else{
+                setIsAdept(true)
             }
         })
     },[])
+
+    useEffect(()=>{
+        setLouding(true)
+        if(isAdept){
+
+            if(tasksRef.current.length > 0 ){
+                if(authenticated){
+                    try {
+                        
+                        tasksRef.current.forEach((element) => {
+                            if(element._id === id){
+                                setTask(element)
+                            }
+                        });
+                        
+                    } catch (error) {}
+                    setLouding(false)
+                }
+
+                
+            }else{
+                setTimeout(()=>{
+                    setCount(count+1)
+                    console.log(count)
+                }, 1);
+            }
+
+        }
+        
+    },[count,id,task,louding,isAdept])
+    
 
     const {editTask} = useTaskAuth()
 
@@ -41,10 +80,10 @@ const EditTask = ()=>{
 
     return(
         <>
-            {!louding && (<div className={styles.container}>
+            {!louding ? (<div className={styles.container}>
                 <div className={styles.header}>
-                    <h2>Create new task</h2>
-                    <p>Configure your new task</p>
+                    <h2>Edit your task</h2>
+                    <p>Configure your task</p>
                 </div>
                 <div>
                     <form onSubmit={handleSubmit}>
@@ -55,10 +94,10 @@ const EditTask = ()=>{
                             <InputLabel label='Short Break' name='short' type='number' value={task.short}/>
                             <InputLabel label='Long Break' name='long' type='number' value={task.long}/>
                         </div>
-                        <button>Create task</button>
+                        <button>Edit task</button>
                     </form>
                 </div>
-            </div>)}
+            </div>):(<p className={styles.louding}>Louding...</p>)}
         </>
         
     )

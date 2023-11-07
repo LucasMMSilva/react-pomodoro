@@ -113,7 +113,7 @@ const Clock = () => {
 
   return (
     <>  
-        {louding == true && (<p className={styles.louding}>Carregando...</p>)}
+        {louding == true && (<p className={styles.louding}>Louding...</p>)}
         {louding == false && (
             
             <div className={styles.container}>
