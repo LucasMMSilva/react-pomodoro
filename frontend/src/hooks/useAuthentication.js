@@ -12,6 +12,9 @@ export const useAuthentication = ()=>{
   const {tasksRef} = useTaskContext()
 
   useEffect(()=>{
+    if(!authenticated){
+      navigate('/login')
+    }
     setLoading(true)
     const token = localStorage.getItem('token')
     if(token){

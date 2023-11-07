@@ -24,10 +24,12 @@ const EditTask = ()=>{
         const verify = verifyUserId(id)
         verify.then((response)=>{
             if(!response){
-                navigate('/')
+                navigate('/error')
             }else{
                 setIsAdept(true)
             }
+        }).catch((err)=>{
+            navigate('/error')
         })
     },[])
 
