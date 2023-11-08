@@ -48,9 +48,9 @@ export const useTaskAuth = () => {
                 }})
                 .then((response)=>{
 
-                    tasksRef.current.forEach(element => {
-                        if(element._id === response._id){
-                            element = response
+                    tasksRef.current.forEach((element,index) => {
+                        if(element._id === response.data._id){
+                            tasksRef.current[index] = response.data
                         }
                     });
                     navigate(`/task/${response.data._id}`)
