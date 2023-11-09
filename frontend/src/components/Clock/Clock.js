@@ -33,6 +33,8 @@ const Clock = () => {
 
     useEffect(()=>{
         setLouding(true)
+        setIsPaused(true)
+        
         if(tasksRef.current.length > 0 ){
             if(authenticated){
                 try {
@@ -66,12 +68,47 @@ const Clock = () => {
         
     },[count,id,task,louding,mainTime])
 
+    useEffect(()=>{
+        const countDown = setInterval(()=>{
+            if(!isPaused){
+                if(minute>0 && seconde>0){
+                    setSeconde((prevTime) => prevTime - 1)
+                }else if(minute>0 && seconde === 0){
+                    setSeconde((prevTime) => prevTime = 59)
+                    setMinute((prevTime) => prevTime - 1)
+                }else if(minute===0 && seconde >0){
+                    setSeconde((prevTime) => prevTime - 1)
+                }else if(minute===0 && seconde ===0){
+                    setSeconde((prevTime) => prevTime = 0)
+                    setMinute((prevTime) => prevTime = 0)
+                    setIsPaused()
+                }
+                titlePage() 
+            }   
+        },1000)
+        return () => clearInterval(countDown);
+    },[isPaused,minute,seconde])
+
+    const titlePage = () => {
+        const min = minute < 10 ? '0' + minute : minute
+        const sec = seconde < 10 ? '0' + seconde : seconde
+        document.title = "Pomodoro - " + min +':'+sec
+    }
+
     const editTask = () => {
         navigate(`/edittask/${id}`)
     }
 
     const deleteTask = () => {
         deleteTaskById(id)
+    }
+    
+    const playPause = () =>{
+        if(isPaused){
+            setIsPaused(false)
+        }else{
+            setIsPaused(true)
+        }
     }
 
   return (
@@ -86,7 +123,7 @@ const Clock = () => {
                 </div>
                 <div className={styles.header}>
                     <h2>{title}</h2>
-                    <p>{time}h</p>
+                    <p>{time>0?((time/60).toFixed(2)):(0)}h</p>
                 </div>
                 <div className={styles.buttoncontainer}>
                     <button className={currentFunction === "POMODORO" ? (styles.bluebutton) : ('')} >Pomodoro</button>
@@ -97,7 +134,7 @@ const Clock = () => {
                     <h1>{minute<=9 && minute>=0 &&(<>0</>)}{minute}:{seconde<=9 && seconde>=0 && (<>0</>)}{seconde}</h1>
                 </div>
                 <div className={styles.buttoncontainer}>
-                   <button className={styles.bluebutton}>Start</button>
+                   <button onClick={playPause} className={styles.bluebutton}>{isPaused?(<>Start</>):(<>Pause</>)}</button>
                 </div>
             </div>)
         }
