@@ -1,10 +1,14 @@
+import { useEffect } from 'react'
 import { useTaskAuth } from '../../hooks/useTaskAuth'
 import InputLabel from '../InputLabel/InputLabel'
 import styles from './CreateTask.module.css'
 
 
-
 const CreateTask = ()=>{
+
+    useEffect(()=>{
+        document.title = "Pomodoro" 
+    },[])
 
     const {createTask} = useTaskAuth()
 

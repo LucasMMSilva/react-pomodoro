@@ -12,6 +12,7 @@ const Register = () => {
   const {authenticated} = useAuthContext()
 
   useEffect(()=>{
+    document.title = "Pomodoro - Register" 
     if(authenticated){
       navigate('/')
     }

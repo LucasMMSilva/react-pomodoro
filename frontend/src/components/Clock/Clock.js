@@ -34,6 +34,8 @@ const Clock = () => {
     useEffect(()=>{
         setLouding(true)
         setIsPaused(true)
+
+        document.title = "Pomodoro - " + title 
         
         if(tasksRef.current.length > 0 ){
             if(authenticated){
@@ -61,7 +63,6 @@ const Clock = () => {
         }else{
             setTimeout(()=>{
                 setcount(count+1)
-                console.log(count)
             }, 1);
         }
 

@@ -20,6 +20,8 @@ const Pomodoro = ({children}) => {
       navigate('/login')
     }
 
+    document.title = "Pomodoro" 
+
     if(loading === true){
       try {
         if(token){

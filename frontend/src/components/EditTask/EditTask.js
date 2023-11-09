@@ -34,6 +34,9 @@ const EditTask = ()=>{
     },[])
 
     useEffect(()=>{
+        
+        document.title = "Pomodoro" 
+
         setLouding(true)
         if(isAdept){
 

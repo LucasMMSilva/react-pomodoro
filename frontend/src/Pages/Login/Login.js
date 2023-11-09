@@ -11,6 +11,7 @@ const Login = () => {
   const {authenticated} = useAuthContext()
 
   useEffect(()=>{
+    document.title = "Pomodoro - Login" 
     if(authenticated){
       navigate('/')
     }
