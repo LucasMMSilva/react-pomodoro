@@ -34,7 +34,7 @@ const EditTask = ()=>{
     },[])
 
     useEffect(()=>{
-        
+
         document.title = "Pomodoro" 
 
         setLouding(true)
@@ -58,7 +58,6 @@ const EditTask = ()=>{
             }else{
                 setTimeout(()=>{
                     setCount(count+1)
-                    console.log(count)
                 }, 1);
             }
 
