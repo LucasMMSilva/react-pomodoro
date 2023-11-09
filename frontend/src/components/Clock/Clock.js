@@ -112,6 +112,25 @@ const Clock = () => {
         }
     }
 
+    const lauchPomodoro = () =>{
+        setIsPaused(true)
+        setCurrentFunction('POMODORO')
+        setMinute(mainTime)
+        setSeconde(0)
+    }
+    const lauchShort = () =>{
+        setIsPaused(true)
+        setCurrentFunction('SHORT')
+        setMinute(short)
+        setSeconde(0)
+    }
+    const lauchLong = () =>{
+        setIsPaused(true)
+        setCurrentFunction('LONG')
+        setMinute(long)
+        setSeconde(0)
+    }
+
   return (
     <>  
         {louding == true && (<p className={styles.louding}>Louding...</p>)}
@@ -127,9 +146,9 @@ const Clock = () => {
                     <p>{time>0?((time/60).toFixed(2)):(0)}h</p>
                 </div>
                 <div className={styles.buttoncontainer}>
-                    <button className={currentFunction === "POMODORO" ? (styles.bluebutton) : ('')} >Pomodoro</button>
-                    <button className={currentFunction === "SHORT" ? (styles.bluebutton) : ('')} >Short Break</button>
-                    <button className={currentFunction === "LONG" ? (styles.bluebutton) : ('')} >Long Break</button>
+                    <button onClick={lauchPomodoro} className={currentFunction === "POMODORO" ? (styles.bluebutton) : ('')} >Pomodoro</button>
+                    <button onClick={lauchShort} className={currentFunction === "SHORT" ? (styles.bluebutton) : ('')} >Short Break</button>
+                    <button onClick={lauchLong} className={currentFunction === "LONG" ? (styles.bluebutton) : ('')} >Long Break</button>
                 </div>
                 <div className={styles.timer}>
                     <h1>{minute<=9 && minute>=0 &&(<>0</>)}{minute}:{seconde<=9 && seconde>=0 && (<>0</>)}{seconde}</h1>
