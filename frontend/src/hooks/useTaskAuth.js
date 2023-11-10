@@ -39,7 +39,7 @@ export const useTaskAuth = () => {
     }
 
     const editTask = async(task) =>{
-        var data;
+    
         const taskData = task
         if(token){
             await api.put(`/task/${taskData.id}`,taskData,{
@@ -61,7 +61,23 @@ export const useTaskAuth = () => {
         }
     }
 
+    const addTimeTraveler = async(task) =>{
+        
+        const taskData = task
+        if(token){
+            await api.put(`/task/${taskData.id}`,taskData,{
+                headers:{
+                  authorization:`Bearer ${JSON.parse(token)}`
+                }})
+                .then((response)=>{
+                    
+                }).catch((err)=>{
+                    console.log(err.response.data.errors)
+                })
+        }
+    }
 
 
-    return {createTask,editTask}
+
+    return {createTask,editTask,addTimeTraveler}
 }

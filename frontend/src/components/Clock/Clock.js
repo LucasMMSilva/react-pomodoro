@@ -4,7 +4,7 @@ import { useParams,useNavigate } from 'react-router-dom'
 import { useTaskContext } from '../../hooks/useTaskContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useClockEvents } from '../../hooks/useClockEvents';
-
+import { useTaskAuth } from '../../hooks/useTaskAuth';
 import { BiSolidEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 
@@ -28,8 +28,10 @@ const Clock = () => {
     const [isPaused,setIsPaused] = useState(true)
     const [currentFunction,setCurrentFunction] = useState('POMODORO')
     const {authenticated} = useAuthContext()
+    const {addTimeTraveler} = useTaskAuth()
     const {editTaskById, deleteTaskById} = useClockEvents()
     const [count, setcount] = useState(0)
+
 
     useEffect(()=>{
         setLouding(true)
@@ -83,6 +85,11 @@ const Clock = () => {
                     setSeconde((prevTime) => prevTime = 0)
                     setMinute((prevTime) => prevTime = 0)
                     setIsPaused()
+                    if(currentFunction === "POMODORO"){
+                        addTime()
+                    }else{
+                        lauchPomodoro()
+                    }
                 }
                 titlePage() 
             }   
@@ -129,6 +136,16 @@ const Clock = () => {
         setCurrentFunction('LONG')
         setMinute(long)
         setSeconde(0)
+    }
+
+    const addTime = () => {
+        const myTask = {
+            id: id,
+            time: time + mainTime
+        }
+        addTimeTraveler(myTask)
+        setTime(time + mainTime)
+        lauchShort()
     }
 
   return (
