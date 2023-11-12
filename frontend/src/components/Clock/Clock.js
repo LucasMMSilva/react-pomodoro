@@ -7,6 +7,7 @@ import { useClockEvents } from '../../hooks/useClockEvents';
 import { useTaskAuth } from '../../hooks/useTaskAuth';
 import { BiSolidEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
+import sound from '../../assets/bells.wav'
 
 import api from '../../hooks/api';
 const Clock = () => {
@@ -85,6 +86,7 @@ const Clock = () => {
                     setSeconde((prevTime) => prevTime = 0)
                     setMinute((prevTime) => prevTime = 0)
                     setIsPaused()
+                    play()
                     if(currentFunction === "POMODORO"){
                         addTime()
                     }else{
@@ -148,6 +150,9 @@ const Clock = () => {
         lauchShort()
     }
 
+    const play = () =>{
+        new Audio(sound).play()
+    }
   return (
     <>  
         {louding == true && (<p className={styles.louding}>Louding...</p>)}
