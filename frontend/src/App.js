@@ -1,14 +1,20 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import './App.css';
-import Pomodoro from './Pages/Pomodoro/Pomodoro';
+
 import Navbar from './components/Navbar/Navbar';
-import Register from './Pages/Register/Register';
+import Pomodoro from './Pages/Pomodoro/Pomodoro';
+
 import Login from './Pages/Login/Login';
-import Clock from './components/Clock/Clock'
-import CreateTask from './components/CreateTask/CreateTask'
+import Register from './Pages/Register/Register';
+
 import Welcome from './components/Welcome/Welcome';
+import Clock from './components/Clock/Clock'
+
+import CreateTask from './components/CreateTask/CreateTask'
 import EditTask from './components/EditTask/EditTask';
+
 import ErrorPage from './components/ErrorPage/ErrorPage';
+
 function App() {
   return (
     <div className="App">

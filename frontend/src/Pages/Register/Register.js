@@ -24,12 +24,10 @@ const Register = () => {
       username:e.target[0].value,
       email:e.target[1].value,
       password:e.target[2].value
-    
     }
-
     authRegister(user)
-      
   }
+
   return (
     <div className={styles.container}>
         <div className={styles.image}>

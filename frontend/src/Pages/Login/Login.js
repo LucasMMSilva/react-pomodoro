@@ -5,9 +5,10 @@ import {Link, useNavigate} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { useAuthContext } from '../../hooks/useAuthContext'
 const Login = () => {
-  
-  const {authLogin} = useAuthentication()
+
   const navigate = useNavigate()
+
+  const {authLogin} = useAuthentication()
   const {authenticated} = useAuthContext()
 
   useEffect(()=>{

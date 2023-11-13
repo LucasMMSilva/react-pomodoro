@@ -9,14 +9,20 @@ import { BiSolidEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 import sound from '../../assets/bells.wav'
 
-import api from '../../hooks/api';
 const Clock = () => {
-    const initiar = useRef();
-    const {id} = useParams()
     const navigate = useNavigate()
-    const task = useRef([])
+
+    const {id} = useParams()
+
     const {tasksRef} = useTaskContext()
+    const {authenticated} = useAuthContext()
+    const {deleteTaskById} = useClockEvents()
+    const {addTimeTraveler} = useTaskAuth()
+
+    const task = useRef([])
+    
     const [louding,setLouding] = useState(true)
+    const [count, setcount] = useState(0)
 
     const [title,setTitle] = useState('')
     const [time,setTime] = useState(0)
@@ -28,11 +34,6 @@ const Clock = () => {
     const [seconde,setSeconde] = useState(0)
     const [isPaused,setIsPaused] = useState(true)
     const [currentFunction,setCurrentFunction] = useState('POMODORO')
-    const {authenticated} = useAuthContext()
-    const {addTimeTraveler} = useTaskAuth()
-    const {editTaskById, deleteTaskById} = useClockEvents()
-    const [count, setcount] = useState(0)
-
 
     useEffect(()=>{
         setLouding(true)
@@ -68,7 +69,6 @@ const Clock = () => {
                 setcount(count+1)
             }, 1);
         }
-
         
     },[count,id,task,louding,mainTime])
 
@@ -127,12 +127,14 @@ const Clock = () => {
         setMinute(mainTime)
         setSeconde(0)
     }
+
     const lauchShort = () =>{
         setIsPaused(true)
         setCurrentFunction('SHORT')
         setMinute(short)
         setSeconde(0)
     }
+
     const lauchLong = () =>{
         setIsPaused(true)
         setCurrentFunction('LONG')
@@ -153,6 +155,7 @@ const Clock = () => {
     const play = () =>{
         new Audio(sound).play()
     }
+    
   return (
     <>  
         {louding == true && (<p className={styles.louding}>Louding...</p>)}

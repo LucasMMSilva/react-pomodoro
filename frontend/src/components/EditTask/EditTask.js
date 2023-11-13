@@ -8,17 +8,19 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import { useAuthentication } from '../../hooks/useAuthentication'
 const EditTask = ()=>{
 
-    const {id} = useParams()
-    const {tasksRef} = useTaskContext()
+    const navigate = useNavigate()
 
-    const [task, setTask] = useState([])
-    const [louding,setLouding] = useState(true)
-    const [count,setCount] = useState(0)
-    const [isAdept,setIsAdept] = useState(false)
-    
+    const {id} = useParams()
+
+    const {tasksRef} = useTaskContext()
     const {authenticated} = useAuthContext()
     const {verifyUserId} = useAuthentication()
-    const navigate = useNavigate()
+    const {editTask} = useTaskAuth()
+
+    const [task, setTask] = useState([])
+    const [isAdept,setIsAdept] = useState(false)
+    const [louding,setLouding] = useState(true)
+    const [count,setCount] = useState(0)
 
     useLayoutEffect(()=>{
         const verify = verifyUserId(id)
@@ -60,13 +62,8 @@ const EditTask = ()=>{
                     setCount(count+1)
                 }, 1);
             }
-
-        }
-        
+        } 
     },[count,id,task,louding,isAdept])
-    
-
-    const {editTask} = useTaskAuth()
 
     const handleSubmit = (e) => {
 

@@ -6,11 +6,11 @@ import styles from './CreateTask.module.css'
 
 const CreateTask = ()=>{
 
+    const {createTask} = useTaskAuth()
+
     useEffect(()=>{
         document.title = "Pomodoro" 
     },[])
-
-    const {createTask} = useTaskAuth()
 
     const handleSubmit = (e) => {
 

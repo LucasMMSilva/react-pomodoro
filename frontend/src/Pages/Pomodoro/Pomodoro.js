@@ -7,14 +7,15 @@ import { useTaskContext } from '../../hooks/useTaskContext'
 
 const Pomodoro = ({children}) => {
 
-  // Hooks
   const navigate = useNavigate()
-  const [loading,setLoading] = useState(true)
+
   const {tasksRef} = useTaskContext()
   const {authenticated} = useAuthContext()
 
   const token = localStorage.getItem('token')
-  
+
+  const [loading,setLoading] = useState(true)
+
   useLayoutEffect(()=>{
     if(!authenticated){
       navigate('/login')
@@ -31,13 +32,13 @@ const Pomodoro = ({children}) => {
             await api.get('/task/tasks',{
             headers:{
               authorization:`Bearer ${JSON.parse(token)}`
-
             }
             }).then((response)=>{
               tasksRef.current = response.data
               setLoading(false)
             }).catch((error)=>{
-              console.log(error.response.data)
+              
+
             })
 
           }

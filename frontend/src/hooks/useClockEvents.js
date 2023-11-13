@@ -5,7 +5,7 @@ import { useTaskContext } from './useTaskContext'
 export const useClockEvents = () => {  
 
     const navigate = useNavigate()
-    const {authenticated} = useAuthContext();
+    
     const {tasksRef} = useTaskContext()
 
     const token = localStorage.getItem('token')
@@ -29,7 +29,6 @@ export const useClockEvents = () => {
         })
 
     }
-
 
     return {deleteTaskById}
 }
