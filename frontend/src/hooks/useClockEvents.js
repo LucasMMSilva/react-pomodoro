@@ -25,7 +25,7 @@ export const useClockEvents = () => {
             tasksRef.current = newTasks
             navigate('/')
         }).catch((err)=>{
-            console.log(err.response.data.errors)
+            // Flash Message
         })
 
     }

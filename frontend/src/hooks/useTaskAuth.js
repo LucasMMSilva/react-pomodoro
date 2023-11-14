@@ -29,7 +29,7 @@ export const useTaskAuth = () => {
                     navigate(`/task/${response.data._id}`)
                     
                 }).catch((err)=>{
-                    console.log(err.response.data.errors)
+                    // Flash Message
                 })
         }
     }
@@ -51,7 +51,7 @@ export const useTaskAuth = () => {
                     navigate(`/task/${response.data._id}`)
                     
                 }).catch((err)=>{
-                    console.log(err.response.data.errors)
+                    // Flash Message
                 })
         }
     }
@@ -66,7 +66,7 @@ export const useTaskAuth = () => {
                 .then((response)=>{
                     
                 }).catch((err)=>{
-                    console.log(err.response.data.errors)
+                    // Flash Message
                 })
         }
     }

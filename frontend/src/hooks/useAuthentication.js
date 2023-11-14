@@ -46,12 +46,13 @@ export const useAuthentication = ()=>{
       await api.post('/user/register',user)
       .then((response)=>{
          data = response.data
+      }).catch((err)=>{
+        // flashMessage
       })
       authUser(data)
     }catch(error){
-
-    }
-    
+      navigate('/error')
+    }    
   }
 
   const authLogin = async(user)=>{
@@ -60,12 +61,13 @@ export const useAuthentication = ()=>{
       await api.post('/user/login',user)
       .then((response)=>{
          data = response.data
+      }).catch((err)=>{
+        // flashMessage
       })
       authUser(data)
     } catch (error) {
-      
+      navigate('/error')
     }
-
   }
 
   const verifyUserId = async(id)=>{ 
@@ -80,6 +82,8 @@ export const useAuthentication = ()=>{
       }})
       .then((response)=>{
         data = response.data.userId
+      }).catch((err)=>{
+        // flashMessage
       })
     }
 
