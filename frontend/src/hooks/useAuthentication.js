@@ -3,6 +3,7 @@ import {useEffect,useState} from 'react'
 import {useNavigate, useLocation } from 'react-router-dom'
 import { useAuthContext } from './useAuthContext'
 import { useTaskContext } from './useTaskContext'
+import { useFlashMessage } from './useFlashMessage'
 
 export const useAuthentication = ()=>{
   const [loading,setLoading] = useState(false)
@@ -10,6 +11,7 @@ export const useAuthentication = ()=>{
 
   const {authenticated,setAuthenticated} = useAuthContext()
   const {tasksRef} = useTaskContext()
+  const {setFlashMessage} = useFlashMessage()
   const location = useLocation()
   const path = location.pathname
   useEffect(()=>{
@@ -51,11 +53,12 @@ export const useAuthentication = ()=>{
       var data 
       await api.post('/user/register',user)
       .then((response)=>{
-         data = response.data
+          data = response.data
+          authUser(data)
       }).catch((err)=>{
-        // flashMessage
+          setFlashMessage(err.response.data)
       })
-      authUser(data)
+      
     }catch(error){
       navigate('/error')
     }    
@@ -67,10 +70,11 @@ export const useAuthentication = ()=>{
       await api.post('/user/login',user)
       .then((response)=>{
          data = response.data
+         authUser(data)
       }).catch((err)=>{
-        // flashMessage
+        setFlashMessage(err.response.data)
       })
-      authUser(data)
+      
     } catch (error) {
       navigate('/error')
     }
