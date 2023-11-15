@@ -6,10 +6,11 @@ export const AuthContextProvider = ({children})=>{
     
     const token = localStorage.getItem('token')
     const hasToken = token ? true : false
+    const [error,setError] = useState({error:'',type:''})
     const [authenticated, setAuthenticated] = useState(hasToken) 
 
     return (
-        <AuthContext.Provider value={{authenticated,setAuthenticated}}>
+        <AuthContext.Provider value={{authenticated,setAuthenticated,error,setError}}>
             {children}
         </AuthContext.Provider>
     )

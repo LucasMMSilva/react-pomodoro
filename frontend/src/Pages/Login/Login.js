@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const {authLogin} = useAuthentication()
-  const {authenticated} = useAuthContext()
+  const {authenticated,error} = useAuthContext()
 
   useEffect(()=>{
     document.title = "Pomodoro - Login" 
@@ -17,7 +17,6 @@ const Login = () => {
       navigate('/')
     }
   },[authenticated])
-
 
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -41,9 +40,9 @@ const Login = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <InputLabel label='E-mail' name='email' type='email' placeholder='ex. lucasmanoel@mail.com'/>
-                <p className={styles.error}>Erro no email.</p>
+                {error && error.type === 'LOGIN email' && <p className={styles.error}>Erro no email.</p>}
                 <InputLabel label='Password' name='password' type='password' placeholder='The password must be longer than 6 characters.'/>
-                <p className={styles.error}>Erro na senha.</p>
+                {error && error.type === 'LOGIN password' && <p className={styles.error}>Erro na senha.</p>}
                 <button type='submit'>Login</button>
             </form>
             <p className={styles.redirect}>Don't have an account yet? <Link to='/register'>Click here</Link>.</p>
