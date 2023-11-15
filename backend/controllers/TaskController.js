@@ -101,7 +101,7 @@ const deleteTaskById = async(req,res)=>{
     }
     try{
         await Task.deleteOne(task._id)
-        res.status(200).json({msg:['Task deleted successfully.']})
+        res.status(200).json({msg:'Task deleted successfully.',type:'DELETETASK',time:10000})
     }catch(error){
         res.status(422).json({errors:['Task not found.']})
     }

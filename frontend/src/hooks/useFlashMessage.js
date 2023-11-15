@@ -1,18 +1,19 @@
 import { useAuthContext } from "./useAuthContext"
 export const useFlashMessage = () =>{
-    const {error,setError} = useAuthContext()
+    const {message,setMessage} = useAuthContext()
 
     function clearError(){
-        setError({error:'',type:'',time:0})
+        setMessage({})
     }
 
     const setFlashMessage = (data) => {
-        setError(data)
+        setMessage(data)
         if(data.time>0){
             setTimeout(() => {
                 clearError()
             }, data.time);
         }
+        console.log(data.errors)
     }
 
     return {setFlashMessage}

@@ -13,3 +13,30 @@ margin: 50px auto;
     font-size: 1.15em;
     font-weight: 200;
 }
+
+.emphasis div{
+    display: block;
+    background-color: rgb(247, 211, 211);
+    color: brown;
+    padding: 0px 15px;
+    margin-bottom: 20px;
+    border: 1px dotted rgb(230, 169, 169);
+    border-radius: 10px;
+    margin-top: -30px;
+}
+.emphasis div *{
+    display: inline;
+    line-height: 50px;
+    
+}
+.emphasis div svg{
+    font-size: 1.6em;
+    padding: 0;
+    margin-bottom:-6px;
+}
+.emphasis div p{
+    align-content: center;
+    margin-left: 15px;
+    color: brown;
+    font-weight: 300;
+}

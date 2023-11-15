@@ -9,7 +9,7 @@ const Register = () => {
   const navigate = useNavigate()
 
   const {authRegister} = useAuthentication()
-  const {authenticated,error} = useAuthContext()
+  const {authenticated,message} = useAuthContext()
 
   useEffect(()=>{
     document.title = "Pomodoro - Register" 
@@ -41,11 +41,11 @@ const Register = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <InputLabel label='Username' name='username' type='text' placeholder='ex. lucasmanoel'/>
-                {error && error.type === 'REGISTER username' && <p className={styles.error}>Erro no nome de usuário.</p>}
+                {message && message.type === 'REGISTER username' && <p className={styles.error}>{message.errors}</p>}
                 <InputLabel label='E-mail' name='email' type='email' placeholder='ex. lucasmanoel@mail.com'/>
-                {error && error.type === 'REGISTER email' && <p className={styles.error}>Erro no email.</p>}
+                {message && message.type === 'REGISTER email' && <p className={styles.error}>{message.errors}</p>}
                 <InputLabel label='Password' name='password' type='password' placeholder='The password must be longer than 6 characters.'/>
-                {error && error.type === 'REGISTER password' && <p className={styles.error}>Erro na senha.</p>}
+                {message && message.type === 'REGISTER password' && <p className={styles.error}>{message.errors}</p>}
                 <button type='submit'>Register</button>
             </form>
             <p className={styles.redirect}>Already have an account? <Link to='/login'>Click here</Link>.</p>
