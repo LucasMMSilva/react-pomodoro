@@ -41,7 +41,9 @@ const Login = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <InputLabel label='E-mail' name='email' type='email' placeholder='ex. lucasmanoel@mail.com'/>
+                <p className={styles.error}>Erro no email.</p>
                 <InputLabel label='Password' name='password' type='password' placeholder='The password must be longer than 6 characters.'/>
+                <p className={styles.error}>Erro na senha.</p>
                 <button type='submit'>Login</button>
             </form>
             <p className={styles.redirect}>Don't have an account yet? <Link to='/register'>Click here</Link>.</p>

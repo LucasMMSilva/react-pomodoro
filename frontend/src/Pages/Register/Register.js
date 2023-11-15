@@ -41,8 +41,11 @@ const Register = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <InputLabel label='Username' name='username' type='text' placeholder='ex. lucasmanoel'/>
+                <p className={styles.error}>Erro no nome de usuário.</p>
                 <InputLabel label='E-mail' name='email' type='email' placeholder='ex. lucasmanoel@mail.com'/>
+                <p className={styles.error}>Erro no email.</p>
                 <InputLabel label='Password' name='password' type='password' placeholder='The password must be longer than 6 characters.'/>
+                <p className={styles.error}>Erro na senha.</p>
                 <button type='submit'>Register</button>
             </form>
             <p className={styles.redirect}>Already have an account? <Link to='/login'>Click here</Link>.</p>

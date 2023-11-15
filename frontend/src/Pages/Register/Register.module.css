@@ -73,3 +73,9 @@ div.formcontainer p a{
 p.redirect{
     text-align: center;
 }
+p.error{
+    font-size: 0.8em;
+    color: #C92E1C;
+    margin-top: -5px;
+    margin-bottom: 6px;
+}

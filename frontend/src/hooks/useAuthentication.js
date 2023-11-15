@@ -1,6 +1,6 @@
 import api from './api'
 import {useEffect,useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useLocation } from 'react-router-dom'
 import { useAuthContext } from './useAuthContext'
 import { useTaskContext } from './useTaskContext'
 
@@ -10,10 +10,16 @@ export const useAuthentication = ()=>{
 
   const {authenticated,setAuthenticated} = useAuthContext()
   const {tasksRef} = useTaskContext()
-
+  const location = useLocation()
+  const path = location.pathname
   useEffect(()=>{
     if(!authenticated){
-      navigate('/login')
+      if(path === '/login' || path === '/register'){
+
+      }else{
+        navigate('/login')
+      }
+      
     }
     setLoading(true)
     const token = localStorage.getItem('token')
