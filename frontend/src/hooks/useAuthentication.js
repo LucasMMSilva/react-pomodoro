@@ -11,7 +11,7 @@ export const useAuthentication = ()=>{
 
   const {authenticated,setAuthenticated} = useAuthContext()
   const {tasksRef} = useTaskContext()
-  const {setFlashMessage} = useFlashMessage()
+  const {setFlashMessage,clearMessage} = useFlashMessage()
   const location = useLocation()
   const path = location.pathname
   useEffect(()=>{
@@ -36,6 +36,7 @@ export const useAuthentication = ()=>{
     localStorage.setItem('token',JSON.stringify(data.token))
     localStorage.setItem('userid',JSON.stringify(data._id))
     setAuthenticated(true)
+    clearMessage()
     navigate('/')
   }
 
@@ -93,7 +94,7 @@ export const useAuthentication = ()=>{
       .then((response)=>{
         data = response.data.userId
       }).catch((err)=>{
-        // flashMessage
+        navigate('/error')
       })
     }
 

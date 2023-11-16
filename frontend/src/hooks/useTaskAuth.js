@@ -9,7 +9,7 @@ export const useTaskAuth = () => {
     const {tasksRef} = useTaskContext()
     const [token,setToken] = useState('')
     const navigate = useNavigate()
-    const {setFlashMessage} = useFlashMessage()
+    const {setFlashMessage,clearMessage} = useFlashMessage()
 
     useEffect(()=>{
         setToken(localStorage.getItem('token'))
@@ -28,6 +28,7 @@ export const useTaskAuth = () => {
                 }})
                 .then((response)=>{
                     tasksRef.current.push(response.data)
+                    clearMessage()
                     navigate(`/task/${response.data._id}`)
                     
                 }).catch((err)=>{
@@ -50,10 +51,11 @@ export const useTaskAuth = () => {
                             tasksRef.current[index] = response.data
                         }
                     });
+                    clearMessage()
                     navigate(`/task/${response.data._id}`)
                     
                 }).catch((err)=>{
-                    // Flash Message
+                    setFlashMessage(err.response.data)
                 })
         }
     }
@@ -64,12 +66,12 @@ export const useTaskAuth = () => {
             await api.put(`/task/${taskData.id}`,taskData,{
                 headers:{
                   authorization:`Bearer ${JSON.parse(token)}`
-                }})
+                }})/*
                 .then((response)=>{
                     
                 }).catch((err)=>{
                     // Flash Message
-                })
+                })*/
         }
     }
 

@@ -27,7 +27,7 @@ export const useClockEvents = () => {
             setFlashMessage(response.data)
             navigate('/')
         }).catch((err)=>{
-            // Flash Message
+            navigate('/error')
         })
 
     }

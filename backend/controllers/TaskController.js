@@ -64,6 +64,14 @@ const taskUpdateById = async (req,res)=>{
         res.status(422).json({errors:['Access denied.']})
         return
     }
+    if(!title || title.length == 0){
+        res.status(422).json({errors:'The title is mandatory.',type:'EDITTASK title',time:0})
+        return
+    }
+    if(!mainTime || mainTime == 0 || !short || short == 0 || !long || long == 0){
+        res.status(422).json({errors:'The minimum value is 1 minute.',type:'EDITTASK time',time:0})
+        return
+    }
     if(title){
         task.title = title
     }

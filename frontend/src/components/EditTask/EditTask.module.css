@@ -48,3 +48,9 @@ button{
 p.louding{
     color: gray;
 }
+p.error{
+    font-size: .9em;
+    margin-top: -5px;
+    margin-bottom: 8px;
+    color: brown;
+}

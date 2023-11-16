@@ -6,6 +6,7 @@ import { useTaskContext } from '../../hooks/useTaskContext'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useAuthentication } from '../../hooks/useAuthentication'
+import { useFlashMessage } from '../../hooks/useFlashMessage'
 const EditTask = ()=>{
 
     const navigate = useNavigate()
@@ -13,7 +14,7 @@ const EditTask = ()=>{
     const {id} = useParams()
 
     const {tasksRef} = useTaskContext()
-    const {authenticated} = useAuthContext()
+    const {authenticated,message} = useAuthContext()
     const {verifyUserId} = useAuthentication()
     const {editTask} = useTaskAuth()
 
@@ -21,9 +22,11 @@ const EditTask = ()=>{
     const [isAdept,setIsAdept] = useState(false)
     const [louding,setLouding] = useState(true)
     const [count,setCount] = useState(0)
+    const {clearMessage} = useFlashMessage()
 
     useLayoutEffect(()=>{
         const verify = verifyUserId(id)
+        clearMessage()
         verify.then((response)=>{
             if(!response){
                 navigate('/error')
@@ -90,12 +93,14 @@ const EditTask = ()=>{
                 <div>
                     <form onSubmit={handleSubmit}>
                         <InputLabel label='Title' name='title' type='text' placeholder='Enter the task name' value={task.title}/>
+                        {message && message.type === 'EDITTASK title' && <p className={styles.error}>{message.errors}</p>}
                         <p className={styles.timerconfigheader}>Timer settings <span>{'( In minutes )'}</span></p>
                         <div className={styles.timerconfig}>
                             <InputLabel label='Pomodoro Time' name='mainTimer' type='number' value={task.mainTime}/>
                             <InputLabel label='Short Break' name='short' type='number' value={task.short}/>
                             <InputLabel label='Long Break' name='long' type='number' value={task.long}/>
                         </div>
+                        {message && message.type === 'EDITTASK time' && <p className={styles.error}>{message.errors}</p>}
                         <button>Edit task</button>
                     </form>
                 </div>

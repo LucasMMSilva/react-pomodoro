@@ -4,7 +4,6 @@ import styles from './Pomodoro.module.css'
 import api from '../../hooks/api'
 import {useAuthContext} from '../../hooks/useAuthContext'
 import { useTaskContext } from '../../hooks/useTaskContext'
-
 const Pomodoro = ({children}) => {
 
   const navigate = useNavigate()
@@ -15,6 +14,8 @@ const Pomodoro = ({children}) => {
   const token = localStorage.getItem('token')
 
   const [loading,setLoading] = useState(true)
+
+
 
   useLayoutEffect(()=>{
     if(!authenticated){
