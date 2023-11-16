@@ -4,14 +4,17 @@ import InputLabel from '../../components/InputLabel/InputLabel'
 import {Link, useNavigate} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import { useFlashMessage } from '../../hooks/useFlashMessage'
 const Login = () => {
 
   const navigate = useNavigate()
 
   const {authLogin} = useAuthentication()
   const {authenticated,message} = useAuthContext()
+  const {clearMessage} = useFlashMessage()
 
   useEffect(()=>{
+    clearMessage()
     document.title = "Pomodoro - Login" 
     if(authenticated){
       navigate('/')

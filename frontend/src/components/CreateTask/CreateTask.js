@@ -3,12 +3,15 @@ import { useTaskAuth } from '../../hooks/useTaskAuth'
 import InputLabel from '../InputLabel/InputLabel'
 import styles from './CreateTask.module.css'
 import { useAuthContext } from '../../hooks/useAuthContext'
-
+import { useFlashMessage } from '../../hooks/useFlashMessage'
 const CreateTask = ()=>{
+    
     const {message} = useAuthContext()
     const {createTask} = useTaskAuth()
+    const {clearMessage} = useFlashMessage()
 
     useEffect(()=>{
+        clearMessage()
         document.title = "Pomodoro" 
     },[])
 
