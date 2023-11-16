@@ -5,11 +5,11 @@ const createTask = async(req,res) =>{
     const userId = req.user.id
     
     if(!title || title.length == 0){
-        res.status(422).json({errors:['The title is mandatory.']})
+        res.status(422).json({errors:'The title is mandatory.',type:'CREATETASK title',time:0})
         return
     }
     if(!mainTime || mainTime == 0 || !short || short == 0 || !long || long == 0){
-        res.status(422).json({errors:['The minimum value is 1 minute.']})
+        res.status(422).json({errors:'The minimum value is 1 minute.',type:'CREATETASK time',time:0})
         return
     }
 

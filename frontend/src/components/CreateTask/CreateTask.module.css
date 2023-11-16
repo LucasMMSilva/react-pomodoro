@@ -45,3 +45,9 @@ button{
     font-size: 1.1em;
     cursor: pointer;
 }
+p.error{
+    font-size: .9em;
+    margin-top: -5px;
+    margin-bottom: 8px;
+    color: brown;
+}

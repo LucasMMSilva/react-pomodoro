@@ -3,11 +3,13 @@ import { useAuthContext } from './useAuthContext'
 import {useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTaskContext } from './useTaskContext'
+import {useFlashMessage} from './useFlashMessage'
 export const useTaskAuth = () => {
     const {setAuthenticated} = useAuthContext()
     const {tasksRef} = useTaskContext()
     const [token,setToken] = useState('')
     const navigate = useNavigate()
+    const {setFlashMessage} = useFlashMessage()
 
     useEffect(()=>{
         setToken(localStorage.getItem('token'))
@@ -29,7 +31,7 @@ export const useTaskAuth = () => {
                     navigate(`/task/${response.data._id}`)
                     
                 }).catch((err)=>{
-                    // Flash Message
+                    setFlashMessage(err.response.data)
                 })
         }
     }
