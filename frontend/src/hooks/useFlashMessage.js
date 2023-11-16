@@ -13,7 +13,6 @@ export const useFlashMessage = () =>{
                 clearMessage()
             }, data.time);
         }
-        console.log(data.errors)
     }
 
     return {setFlashMessage,clearMessage}
