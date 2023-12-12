@@ -7,6 +7,10 @@ const jwtSecret = process.env.SECRET_JWT
 const generateToken = (id)=>{
     return jwt.sign({id},jwtSecret,{expiresIn:'7d'})
 }
+const valideEmail = (email) =>{
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+    return emailRegex.test(email)
+}
 
 const register = async (req,res)=>{
     const {username,email,password} = req.body
@@ -26,39 +30,8 @@ const register = async (req,res)=>{
     }
 
     //validate email
-    const findEmail = await User.findOne({email:email})
-    if(findEmail){
-        res.status(422).json({errors:"This email is already in use!",type:'REGISTER email',time:0})
-        return
-    }
-    if(!email){
-        res.status(422).json({errors:"Email is required!",type:'REGISTER email',time:0})
-        return
-    }
-    if(email.includes('@')){
-        const emailArrayValidate = email.split('@')
-        if(emailArrayValidate[0].length>=3){
-            if(emailArrayValidate[1].includes('.')){
-                const domainArrayValidate = emailArrayValidate[1].split('.')
-                if(domainArrayValidate[0].length > 0){
-                    if(!domainArrayValidate[1].length > 0){
-                        res.status(422).json({errors:"Invalid email!",type:'REGISTER email',time:0})
-                        return
-                    }
-                }else{
-                    res.status(422).json({errors:"Invalid email!",type:'REGISTER email',time:0})
-                    return
-                }
-            }else{
-                res.status(422).json({errors:"Invalid email!",type:'REGISTER email',time:0})
-                return
-            }
-        }else{
-            res.status(422).json({errors:"Invalid email!",type:'REGISTER email',time:0})
-            return
-        }
-    }else{
-        res.status(422).json({errors:"Invalid email!",type:'REGISTER email',time:0})
+    if(!valideEmail(email)){
+        res.status(422).json({errors:"Invalid e-mail!",type:'REGISTER email',time:0})
         return
     }
 
